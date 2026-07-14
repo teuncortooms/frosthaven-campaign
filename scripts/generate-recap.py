@@ -1,10 +1,12 @@
-"""Generate campaign-recap.md from stories.json and Secretariat recap labels."""
+"""Generate player-facing campaign recap (Markdown + HTML) from stories.json."""
+import html
 import json
 import re
 import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+RETIREMENT_SCENARIO_MIN = 200
 
 
 def clean(text: str | None) -> str | None:
@@ -58,6 +60,179 @@ def recap_text(recaps: dict, num: int) -> str | None:
     return None
 
 
+def story_decisions(scenarios: dict[int, dict], names: dict[int, str]) -> list[str]:
+    lines: list[str] = []
+
+    def add(text: str) -> None:
+        if text not in lines:
+            lines.append(text)
+
+    if scenarios.get(1, {}).get("state") == "complete":
+        if scenarios.get(2, {}).get("state") == "blocked":
+            add(
+                "After the town attack, we went on the **Algox Offensive** "
+                "rather than scouting the mountain pass first."
+            )
+
+    if scenarios.get(4, {}).get("state") == "complete":
+        add(
+            "At **Heart of Ice**, we split up to pursue three threads: "
+            "the Algox war on **Snowscorn Peak**, the **Lurkers** at the Biting Sea, "
+            "and the **Unfettered** constructs in the Crystal Fields."
+        )
+
+    if scenarios.get(6, {}).get("state") == "complete":
+        add(
+            "We sided with the **Icespeakers** against the Snowspeakers "
+            "at Snowscorn Mountain."
+        )
+
+    if scenarios.get(19, {}).get("state") == "complete":
+        s30 = scenarios.get(30, {})
+        s28 = scenarios.get(28, {})
+        if s30.get("state") in ("incomplete", "complete") or s28.get("state") == "blocked":
+            add(
+                "After **Skyhall**, we joined the push for **war** against the other "
+                "Algox faction instead of backing the peace summit."
+            )
+        elif s28.get("state") == "complete":
+            add(
+                "After **Skyhall**, we backed **peace talks** between the Algox factions."
+            )
+
+    s30 = scenarios.get(30, {})
+    if s30.get("state") == "incomplete":
+        note = s30.get("notes", "").strip()
+        if note:
+            add(f"We **failed** **War of the Spire B** ({note}).")
+        else:
+            add("We **failed** **War of the Spire B** and still need to retry or move on.")
+
+    s44 = scenarios.get(44, {})
+    if s44.get("state") == "complete":
+        choice = str(s44.get("choice", ""))
+        if choice == "59" or scenarios.get(59, {}).get("state") == "complete":
+            add(
+                "Facing the Unfettered **Orphan**, we tried to **broker peace** "
+                "rather than destroy them."
+            )
+        elif choice == "58" or scenarios.get(58, {}).get("state") == "complete":
+            add(
+                "Facing the Unfettered **Orphan**, we chose to **destroy** the threat."
+            )
+
+    if scenarios.get(36, {}).get("state") == "complete":
+        add(
+            "In the Unfettered complex, we reached the core through the **Buried Ducts** "
+            "(not the deeper transit tunnels)."
+        )
+
+    for num, state in sorted(scenarios.items()):
+        note = state.get("notes", "").strip()
+        if not note or num == 30:
+            continue
+        name = names.get(num, f"scenario {num}")
+        add(f"Table note — **{name} ({num})**: {note}")
+
+    return lines
+
+
+def format_scenario_entry(
+    num: int,
+    name: str,
+    state: dict,
+    recaps: dict,
+    *,
+    include_recap: bool = True,
+) -> list[str]:
+    lines: list[str] = []
+    note = state.get("notes", "").strip()
+    title = f"**{num} — {name}**"
+    if note:
+        title += f" — *{note}*"
+    lines.append(f"- {title}")
+    if include_recap:
+        recap = clean(recap_text(recaps, num))
+        if recap:
+            lines.append(f"  - {recap}")
+    return lines
+
+
+def markdown_to_html(md: str) -> str:
+    """Minimal Markdown to HTML for sharing (headings, bold, lists, italics)."""
+    out: list[str] = []
+    in_ul = False
+
+    def close_ul() -> None:
+        nonlocal in_ul
+        if in_ul:
+            out.append("</ul>")
+            in_ul = False
+
+    def inline(text: str) -> str:
+        text = html.escape(text)
+        text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
+        text = re.sub(r"\*(.+?)\*", r"<em>\1</em>", text)
+        return text
+
+    for line in md.splitlines():
+        stripped = line.lstrip()
+        indent = len(line) - len(stripped)
+        if stripped.startswith("### "):
+            close_ul()
+            out.append(f"<h3>{inline(stripped[4:])}</h3>")
+        elif stripped.startswith("## "):
+            close_ul()
+            out.append(f"<h2>{inline(stripped[3:])}</h2>")
+        elif stripped.startswith("# "):
+            close_ul()
+            out.append(f"<h1>{inline(stripped[2:])}</h1>")
+        elif stripped.startswith("- "):
+            if not in_ul:
+                out.append("<ul>")
+                in_ul = True
+            content = stripped[2:]
+            if indent >= 2:
+                out.append(f"<li class='nested'>{inline(content)}</li>")
+            else:
+                out.append(f"<li>{inline(content)}</li>")
+        elif line.strip() == "---":
+            close_ul()
+            out.append("<hr>")
+        elif line.strip() == "":
+            close_ul()
+        else:
+            close_ul()
+            out.append(f"<p>{inline(line)}</p>")
+
+    close_ul()
+    body = "\n".join(out)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frosthaven — where we left off</title>
+  <style>
+    body {{ font-family: Georgia, "Times New Roman", serif; line-height: 1.5; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; color: #222; }}
+    h1 {{ font-size: 1.6rem; border-bottom: 1px solid #ccc; padding-bottom: 0.3rem; }}
+    h2 {{ font-size: 1.25rem; margin-top: 1.5rem; color: #333; }}
+    h3 {{ font-size: 1.05rem; margin-top: 1rem; color: #444; }}
+    ul {{ padding-left: 1.2rem; }}
+    li {{ margin-bottom: 0.5rem; }}
+    li.nested {{ list-style: circle; margin-left: 1rem; font-size: 0.95rem; color: #444; }}
+    p em {{ color: #555; }}
+    hr {{ border: none; border-top: 1px solid #ddd; margin: 2rem 0; }}
+    @media print {{ body {{ margin: 1cm; max-width: none; }} }}
+  </style>
+</head>
+<body>
+{body}
+</body>
+</html>
+"""
+
+
 def main() -> None:
     with open(ROOT / "stories.json", encoding="utf-8") as f:
         save = json.load(f)[0]
@@ -75,225 +250,196 @@ def main() -> None:
             if num.isdigit():
                 scenarios[int(num)] = val
 
-    all_nums = sorted(set(scenarios) | set(range(max(scenarios) + 1 if scenarios else 0)))
-    names = {n: fetch_scenario_name(n) for n in all_nums if n in scenarios or n <= 140}
+    names = {n: fetch_scenario_name(n) for n in sorted(scenarios) if n <= 220}
 
     complete = sorted(n for n, s in scenarios.items() if s.get("state") == "complete")
     incomplete = sorted(n for n, s in scenarios.items() if s.get("state") == "incomplete")
     blocked = sorted(n for n, s in scenarios.items() if s.get("state") == "blocked")
     hidden = sorted(n for n, s in scenarios.items() if s.get("state") == "hidden")
 
-    choices = []
-    for num, state in sorted(scenarios.items()):
-        bits = []
-        if "choice" in state:
-            bits.append(f"choice={state['choice']}")
-        if "promptChoice" in state:
-            bits.append(f"promptChoice={state['promptChoice']}")
-        if "notes" in state:
-            bits.append(f'notes="{state["notes"]}"')
-        if bits:
-            choices.append((num, names.get(num, "?"), ", ".join(bits), state.get("state")))
-
-    archived = campaign.get("archivedCharacters", {})
-    archived_uuids = set(archived.keys())
-    characters = [
-        val
-        for key, val in data.items()
-        if key.startswith("character-")
-        and isinstance(val, dict)
-        and val.get("id")
-        and val.get("uuid") not in archived_uuids
-    ]
-    calendar = campaign["calendar"]
-    week = calendar["week"]
-    sections = calendar["sections"]
+    incomplete_main = [n for n in incomplete if n < RETIREMENT_SCENARIO_MIN]
+    incomplete_retirement = [n for n in incomplete if n >= RETIREMENT_SCENARIO_MIN]
 
     lines: list[str] = []
-    lines.append("# Frosthaven Campaign Recap — teuncortooms")
-    lines.append("")
     updated = save.get("updated_at", "?")[:10]
-    lines.append(f"*Generated from `stories.json` (updated {updated}).*")
+    lines.append("# Frosthaven — where we left off")
     lines.append("")
-    lines.append("## Campaign status")
+    lines.append(
+        f"*Updated {updated}. Scenario list synced from Storyline export — "
+        f"double-check the app before choosing what to play.*"
+    )
     lines.append("")
-    lines.append(f"- **Calendar week:** {week}")
+    lines.append("## Outpost snapshot")
+    lines.append("")
+    lines.append("(From the last manual sync — check your notes for current values.)")
+    lines.append("")
     lines.append(f"- **Morale:** {campaign.get('morale', '?')} / 20")
     lines.append(f"- **Prosperity index:** {campaign.get('prosperityIndex', '?')}")
     lines.append(f"- **Inspiration:** {campaign.get('inspiration', '?')}")
-    lines.append(
-        f"- **Town Guard soldiers:** {campaign.get('soldiers', '?')} "
-        f"(total defense {campaign.get('totalDefense', '?')})"
-    )
+    soldiers = campaign.get("soldiers")
+    defense = campaign.get("totalDefense")
+    if soldiers is not None:
+        guard = f"- **Town Guard:** {soldiers} soldiers"
+        if defense is not None:
+            guard += f" (outpost defense {defense})"
+        lines.append(guard)
     lines.append(f"- **Scenarios completed:** {len(complete)}")
     lines.append("")
-    lines.append("### Next calendar reads")
+    lines.append("## The story so far")
     lines.append("")
-    week_key = str(week)
-    if week_key in sections:
-        for sec in sections[week_key]:
-            lines.append(f"- Week **{week}**: read **§{sec}** in the Section Book")
-    else:
-        lines.append(f"- Week **{week}**: no sections listed for this week in the save.")
+    lines.append(
+        "We are mercenaries who reached **Frosthaven** after the Imperial Pass thawed. "
+        "After the opening attack, we took the **Algox Offensive** rather than scouting first. "
+        "That led us into the Algox civil war, the Lurker Coral Shards, and the Unfettered "
+        "beneath the Crystal Fields — often all at once."
+    )
     lines.append("")
-    lines.append("Upcoming scheduled sections (this week and later):")
-    for w in sorted(sections.keys(), key=int):
-        if int(w) >= week:
-            secs = ", ".join(f"§{s}" for s in sections[w])
-            lines.append(f"- Week {w}: {secs}")
+    lines.append(
+        "On the **Algox** front, we backed the **Icespeakers**, survived **Skyhall**, "
+        "and chose the **war path** over a peace summit. **War of the Spire B** went badly "
+        "(*Keihard gefaald*) — that thread is stuck mid-climax. The Oracle / Unyielding Shard "
+        "storyline (peace summit, Marogh, the combined ice-and-snow ritual) is mostly still ahead."
+    )
     lines.append("")
-    lines.append("## Party")
+    lines.append(
+        "We **made peace with the Unfettered Orphan** (Crain's arc) and cleared a second "
+        "facility up to **Program Control Nexus**; **Collapsing Vent** is still open. "
+        "The **Lurker crown** plot is mid-way — bathysphere and shards, but no reunion yet. "
+        "The **Aesther** elemental array failed at the attunement step (**The Face of Torment**). "
+        "**Pinter's mountain road** is almost done — **Caravan Guards** is next. "
+        "Various **side jobs from treasure chests** are still floating around."
+    )
     lines.append("")
-    for char in sorted(characters, key=lambda x: x.get("sortOrder", 0)):
-        cid = char.get("id", "?")
-        name = char.get("name", cid)
-        level = char.get("level", "?")
-        retirements = char.get("retirements")
-        extra = f", retired {retirements}x" if retirements else ""
-        lines.append(f"- **{name}** ({cid}) — level {level}{extra}")
-    if archived:
-        lines.append("")
-        lines.append("**Retired:**")
-        for uuid, cid in archived.items():
-            retired = next(
-                (
-                    val
-                    for key, val in data.items()
-                    if key == f"character-{uuid}" and isinstance(val, dict)
-                ),
-                None,
+    lines.append("## Choices on the table")
+    lines.append("")
+    lines.append(
+        "Scenarios we **can play next** (or retry), with a story reminder for each. "
+        "Pick one when we meet — or cross-check Storyline if something unlocked since the last export."
+    )
+    lines.append("")
+    if incomplete_main:
+        for num in incomplete_main:
+            lines.extend(
+                format_scenario_entry(
+                    num, names.get(num, "?"), scenarios[num], recaps
+                )
             )
-            name = retired.get("name", cid) if retired else cid
-            level = retired.get("level", "?") if retired else "?"
-            lines.append(f"- **{name}** ({cid}) — retired at level {level}")
+    else:
+        lines.append("- *(none listed in export)*")
     lines.append("")
-    lines.append("## Branch choices (from save)")
-    lines.append("")
-    for num, name, info, state in choices:
-        lines.append(f"- **{num} {name}** [{state}]: {info}")
-    lines.append("")
-    lines.append("## Story so far (inferred)")
-    lines.append("")
-    lines.append(
-        "You are mercenaries hired to reach **Frosthaven** after the Imperial Pass thawed. "
-        "After the opening attack, you took **Algox Offensive (3)** rather than scouting. "
-        "At **Heart of Ice (4)** you opened the three main forks (**6 / 7 / 8**): "
-        "Algox mountains, Lurkers, and Unfettered."
-    )
-    lines.append("")
-    lines.append(
-        "You progressed the **Icespeaker** Algox arc through **Skyhall (19)** and chose the "
-        "**war path** over **Summit Meeting (28)** peace talks. **War of the Spire B (30)** "
-        "is **failed** (*Keihard gefaald*) — the Algox main plot is mid-climax. The Oracle / "
-        "Unyielding Shard chain (28→38→45–57) is largely **not done**."
-    )
-    lines.append("")
-    lines.append(
-        "In parallel you **brokered peace with the Unfettered Orphan (59)** after "
-        "**Nerve Center (44)** via **Buried Ducts (36)**; **Collapsing Vent (98)** remains. "
-        "The **Lurker Coral Crown** arc is **mid-way** (bathysphere thread through 34/42, "
-        "not crown reunion). **Aesther** array is at **The Face of Torment (68)**. "
-        "**Pinter's road** needs **Caravan Guards (116)**. Several **treasure-chest side "
-        "scenarios** are open (107–111, 121, 126, 136)."
-    )
-    lines.append("")
-    lines.append("## Completed scenarios")
-    lines.append("")
-    for num in complete:
-        name = names.get(num, "?")
-        lines.append(f"### {num} — {name}")
-        recap = clean(recap_text(recaps, num))
-        if recap:
-            lines.append("")
-            lines.append(recap)
-        state = scenarios[num]
-        if state.get("treasures"):
-            lines.append("")
-            lines.append(f"*Treasures looted: {state['treasures']}*")
+    if incomplete_retirement:
+        lines.append("### Retirement / personal-quest scenarios")
         lines.append("")
-
-    lines.append("## Open scenarios")
+        for num in incomplete_retirement:
+            lines.extend(
+                format_scenario_entry(
+                    num, names.get(num, "?"), scenarios[num], recaps
+                )
+            )
+        lines.append("")
+    lines.append("## Decisions we made")
     lines.append("")
-    lines.append("### Available (incomplete)")
+    for decision in story_decisions(scenarios, names):
+        lines.append(f"- {decision}")
     lines.append("")
-    for num in incomplete:
-        name = names.get(num, "?")
-        state = scenarios[num]
-        note = state.get("notes", "")
-        extra = f" — *{note}*" if note else ""
-        recap = clean(recap_text(recaps, num))
-        lines.append(f"- **{num} — {name}**{extra}")
-        if recap:
-            snippet = recap if len(recap) <= 300 else recap[:300] + "..."
-            lines.append(f"  - Setup: {snippet}")
+    lines.append("## Campaign progress")
     lines.append("")
-    lines.append("### Blocked (other path taken)")
+    lines.append("### Blocked — other path taken")
     lines.append("")
-    for num in blocked:
-        lines.append(f"- **{num} — {names.get(num, '?')}**")
+    lines.append("We can't do these in this campaign branch:")
     lines.append("")
-    lines.append("### Hidden (not yet revealed)")
+    if blocked:
+        for num in blocked:
+            lines.append(f"- **{num} — {names.get(num, '?')}**")
+    else:
+        lines.append("- *(none)*")
     lines.append("")
-    for num in hidden:
-        lines.append(f"- **{num} — {names.get(num, '?')}**")
+    lines.append("### Hidden — not yet revealed")
     lines.append("")
-    lines.append("## Plot threads at a glance")
+    lines.append("Still secret on the map / in the story:")
+    lines.append("")
+    if hidden:
+        for num in hidden:
+            lines.append(f"- **{num} — {names.get(num, '?')}**")
+    else:
+        lines.append("- *(none)*")
+    lines.append("")
+    lines.append("## Plot threads")
     lines.append("")
     threads = [
         (
             "Algox civil war",
-            "19 done; 30 failed; 28 still listed open; Oracle chain mostly untouched",
-            "30 (retry?), 28 (peace — may be locked by section choices)",
+            "Icespeaker allies; Skyhall done; war assault failed at War of the Spire B.",
+            "Retry the assault, or see whether peace talks (Summit Meeting) are still an option at your table.",
         ),
         (
-            "Unfettered / Crain",
-            "Peace with Orphan (59); second facility through 97",
-            "98 Collapsing Vent; Harbinger seals 61–64 not in save",
+            "Unfettered & Crain",
+            "Peace with the Orphan; second factory cleared through Program Control Nexus.",
+            "Collapsing Vent; the Harbinger / seal storyline may unlock later via Crain's workshop.",
         ),
         (
-            "Lurkers / Coral Crown",
-            "13–22, 32–34, 42, 78",
-            "Crown reunion 49–57, 60 not started",
+            "Lurkers & Coral Crown",
+            "Shards collected; bathysphere built; Sun-in-Shallows arc started.",
+            "Crown reunion scenarios — not started.",
         ),
         (
             "Aesther elementals",
-            "65–67 done",
-            "68 The Face of Torment",
+            "Cores retrieved from four planes; attunement went wrong.",
+            "The Face of Torment — new rift opened.",
         ),
-        ("True Oak", "69–70 done", "—"),
-        ("Pinter mountain road", "114–115 done", "116 Caravan Guards"),
-        ("Mindthief", "120 done", "121 Black Memories"),
         (
-            "Side / chest quests",
-            "108, 113, 127 done",
-            "107, 109–111, 126, 136",
+            "True Oak",
+            "Listerius triangulated the tree; Radiant Order confrontation resolved.",
+            None,
+        ),
+        (
+            "Pinter's Copperneck road",
+            "Explosives and pylon defense done.",
+            "Caravan Guards — first merchant run on the shortcut.",
+        ),
+        (
+            "Mindthief in the woods",
+            "Cleared the influenced guards at the cabin.",
+            "Black Memories — trail leads toward the Black Barrow near Gloomhaven.",
+        ),
+        (
+            "Treasure-map side jobs",
+            "Lustrous Pit, Lush Grotto, Derelict Freighter done.",
+            "Emperor's invitation, factory, temple keystone, ice cave, Joseph's shop, pirate hoard, etc.",
         ),
     ]
-    for title, progress, open_items in threads:
+    for title, progress, next_up in threads:
         lines.append(f"### {title}")
-        lines.append(f"- **Progress:** {progress}")
-        lines.append(f"- **Open:** {open_items}")
+        lines.append(f"- {progress}")
+        if next_up:
+            lines.append(f"- **Still open:** {next_up}")
+        lines.append("")
+    lines.append("## What happened (by scenario)")
+    lines.append("")
+    lines.append("Narrative reminders for scenarios we've **finished**.")
+    lines.append("")
+    for num in complete:
+        name = names.get(num, "?")
+        recap = clean(recap_text(recaps, num))
+        lines.append(f"### {num} — {name}")
+        if recap:
+            lines.append("")
+            lines.append(recap)
         lines.append("")
 
-    lines.append("## Local reference files")
+    lines.append("---")
     lines.append("")
     lines.append(
-        "- `data/fh-recap-en.json` — Gloomhaven Secretariat recap text "
-        "(from [Lurkars/gloomhavensecretariat](https://github.com/Lurkars/gloomhavensecretariat))"
-    )
-    lines.append("- `stories.json` — your campaign export")
-    lines.append(
-        "- Physical **Scenario Book** and **Section Book** remain the source of truth for § entries"
-    )
-    lines.append("")
-    lines.append(
-        "Re-run `python scripts/generate-recap.py` after updating `stories.json`."
+        "Regenerate: `python scripts/generate-recap.py` → `campaign-recap.html` for sharing. "
+        "See `data/campaign-notes.md`."
     )
     lines.append("")
 
-    out = ROOT / "campaign-recap.md"
-    out.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Wrote {out} ({len(lines)} lines)")
+    md_text = "\n".join(lines)
+    (ROOT / "campaign-recap.md").write_text(md_text, encoding="utf-8")
+    (ROOT / "campaign-recap.html").write_text(markdown_to_html(md_text), encoding="utf-8")
+    print(f"Wrote {ROOT / 'campaign-recap.md'} ({len(lines)} lines)")
+    print(f"Wrote {ROOT / 'campaign-recap.html'}")
 
 
 if __name__ == "__main__":

@@ -1,61 +1,141 @@
-# Frosthaven Campaign Recap — teuncortooms
+# Frosthaven — where we left off
 
-*Generated from `stories.json` (updated 2026-07-14).*
+*Updated 2026-07-14. Scenario list synced from Storyline export — double-check the app before choosing what to play.*
 
-## Campaign status
+## Outpost snapshot
 
-- **Calendar week:** 36
+(From the last manual sync — check your notes for current values.)
+
 - **Morale:** 16 / 20
 - **Prosperity index:** 47
 - **Inspiration:** 6
-- **Town Guard soldiers:** 8 (total defense 35)
+- **Town Guard:** 8 soldiers (outpost defense 35)
 - **Scenarios completed:** 40
 
-### Next calendar reads
+## The story so far
 
-- Week **36**: read **§29.3** in the Section Book
-- Week **36**: read **§185.2** in the Section Book
+We are mercenaries who reached **Frosthaven** after the Imperial Pass thawed. After the opening attack, we took the **Algox Offensive** rather than scouting first. That led us into the Algox civil war, the Lurker Coral Shards, and the Unfettered beneath the Crystal Fields — often all at once.
 
-Upcoming scheduled sections (this week and later):
-- Week 36: §29.3, §185.2
-- Week 40: §184.1
-- Week 41: §185.4
-- Week 60: §137.2
+On the **Algox** front, we backed the **Icespeakers**, survived **Skyhall**, and chose the **war path** over a peace summit. **War of the Spire B** went badly (*Keihard gefaald*) — that thread is stuck mid-climax. The Oracle / Unyielding Shard storyline (peace summit, Marogh, the combined ice-and-snow ritual) is mostly still ahead.
 
-## Party
+We **made peace with the Unfettered Orphan** (Crain's arc) and cleared a second facility up to **Program Control Nexus**; **Collapsing Vent** is still open. The **Lurker crown** plot is mid-way — bathysphere and shards, but no reunion yet. The **Aesther** elemental array failed at the attunement step (**The Face of Torment**). **Pinter's mountain road** is almost done — **Caravan Guards** is next. Various **side jobs from treasure chests** are still floating around.
 
-- **Pyroclast** (PY) — level 4, retired 1x
-- **ITEM NOT AVAILABLE** (GE) — level 1
-- **Deathwalker** (DW) — level 3, retired 1x
-- **Blinkblade** (BB) — level 5, retired 2x
-- **Infuser** (IF) — level 1
+## Choices on the table
 
-**Retired:**
-- **Frozen Fist** (FF) — retired at level 9
+Scenarios we **can play next** (or retry), with a story reminder for each. Pick one when we meet — or cross-check Storyline if something unlocked since the last export.
 
-## Branch choices (from save)
+- **28 — Summit Meeting**
+  - You defeated the Icespeakers, but brought one survivor back to meet Chief Lanprul. The survivor reported that Geryuu had sent "burrowers" against them and that he was tired of this war. While Chief Lanprul was receptive, another - Denpang - encouraged an all-out assault with you at the Snowspeakers' side. She left, to plan for war. You stayed with Chief Lanprul to plan for peace, instead.
+- **30 — War of the Spire B** — *Keihard gefaald*
+  - You found that the spirits of Skyhall - a place of great religious significance - had turned against the Icespeakers. While you laid them to rest, Chief Elland declared this could not continue - that war was bringing ruin to all the Algox. An older woman among them, Putargal, instead urged vengeance on the Snowspeakers for what they've done to Snowscorn and Skyhall. She left to plan for an assault against their enemies; you went with her to join the battle.
+- **31 — Crackling Tunnel**
+  - To defeat all the automata, you needed to destroy a strange glowing orb. Once defeated, you were able to investigate a strange door sealed by a complex puzzle door with gears and symbols. This meant nothing to you until the Quatryl academic, Crain Tallengyr, started asking you to investigate "Death Sites" and weird energies that linger in certain parts of the North - probably as the result of a war fought long ago.
+- **42 — Sunless Trench**
+  - There, you were set upon by Lurkers drawn to the pull of the Shards you carry. They wrecked your boat, so you decided to search for another means of travel. Frosthaven's Tinkerer, Pinter Droman, designed a bathysphere - a craft to travel safely underwater - but it needed a power source. He suggested you might find one at the heart of the Radiant Forest. You retrieved the Energy Source and returned it to Pinter. After a few weeks, the Bathysphere was complete - along with a group of underwater suits. It was time to continue following the pull of the Coral Shards.
+- **68 — The Face of Torment**
+  - On return to the Aesther Outpost, you found the eight aesther in trouble. You needed to empower the cores with your own energies. Denizens of the elemental planes came forth to retrieve the stones, and you fought them off. While you succeeded at your task, something still went wrong... A new rift opened.
+- **98 — Collapsing Vent**
+  - You battled with a "Program Director'' who wanted to decontaminate the facility. By beheading you. Cleanly. That didn't sound too appealing, so you defended yourselves and destroyed it. That deactivated all the cleaning robots - and also started collapsing the whole complex. Time to make a ... clean ... get-away.
+- **107 — My Private Empire**
+  - In a chest, you found a wax-sealed letter - exquisitely written and decorated. The letter, signed by an "Emperor Ventillion," invited you to join him for a Midwinter Ball. It included a map to his estate (in the middle of nowhere) and will surely be an actual party, with wine and dancing, and not anything more sinister.
+- **109 — Furious Factory**
+  - You found a delicate piece of curious machinery in a chest. When you took it out, it animated and projected a map above it. You figured out how to manipulated this projected map, and found the location of what looks to be a factory of some sort.
+- **110 — Guardian's Temple**
+  - You found a slab of shaped stone in a chest. It was shaped like a keystone, and you felt like you knew where it belonged. It mentally projected directions for you.
+- **111 — Ice Cave**
+  - You found a silver mirror in a chest. Unlike most mirrors, this one didn't reflect you - it showed an image of your group walking through the wilderness to a cave full of treasure.
+- **116 — Caravan Guards**
+  - Once that was done, Pinter and his crew were able to complete the road. Mayor Satha asked some local merchants to do a test run on this new shortcut, and asked you to guard the first caravans going south.
+- **121 — Black Memories**
+  - Some of the guards had fallen under the influence of the cabin's inhabitant - a group of Vermlings led by a Mindthief. She escaped - and you set to destroying an emitter device she'd been working on. You asked for Captain Olmstead's help in tracking down the Mindthief, and he introduced you to his friend, a Valrath tracker and cartographer named Kefra. It took months, but Kefra returned with news. She'd found evidence of the mindthief - in an old burial mound called the Black Barrow, on the outskirts of Gloomhaven.
+- **122 — The Eternal Crave**
+  - In your travels, you found an elderly Quatryl tending some delicious-smelling peppers. She called these "firepeppers" - and told you a tale of a beast called the Hungry Maw, which lives beneath the Copperneck Mountains. Apparently, it eats entire villages, but can only be sated by a Firepepper Stew. She asked if you were up for a challenge.
+- **126 — Joseph the Lion**
+  - A merchant named Joseph greeted you and told you all of his assistants died, and all of his merchandise was just sitting in the icy wastes. He asked your help to retrieve it. A few weeks after you did, he opened up an "ice-cream" stand in Frosthaven; you decided to check it out.
+- **136 — Abandoned Hideout**
+  - Dinah Snapclaw, the Vermling tavern-keeper at the Boiled Crab, has told you tales of a notorious pirate, Barty Half-Ear. She's had you hunting down ancient coins - like the one she wears. If you find all of them, they're supposed to lead to a huge treasure hoard. After bringing her one of the coins, she told you of the Pirate Queen's Haul, a huge treasure she and Barty were seeking together before he betrayed her. You need four coins to find it; she has one, he has another, you just found a third, and the final one is still missing. She wants both revenge and the treasure, so gave you the location of Barty's hideout. She's pretty sure that's where he's stored his coin. Bring her two more coins, and you'll all be rich, together.
 
-- **1 A Town in Flames** [complete]: promptChoice=3
-- **4 Heart of Ice** [complete]: choice=6,7,8, promptChoice=1
-- **30 War of the Spire B** [incomplete]: notes="Keihard gefaald"
-- **44 Nerve Center** [complete]: choice=59, promptChoice=1
-- **51 Orphan's Halls** [hidden]: promptChoice=1
-- **115 Pylon Problems** [complete]: promptChoice=5
-- **127 Derelict Freighter** [complete]: promptChoice=2, notes="Not 100% sure about no. of crates"
+### Retirement / personal-quest scenarios
 
-## Story so far (inferred)
+- **201 — ?**
+- **202 — ?**
+- **203 — ?**
+- **204 — ?**
+- **205 — ?**
+- **206 — ?**
+- **207 — ?**
+- **208 — ?**
+- **210 — ?**
+- **213 — ?**
+- **214 — ?**
+- **217 — ?**
 
-You are mercenaries hired to reach **Frosthaven** after the Imperial Pass thawed. After the opening attack, you took **Algox Offensive (3)** rather than scouting. At **Heart of Ice (4)** you opened the three main forks (**6 / 7 / 8**): Algox mountains, Lurkers, and Unfettered.
+## Decisions we made
 
-You progressed the **Icespeaker** Algox arc through **Skyhall (19)** and chose the **war path** over **Summit Meeting (28)** peace talks. **War of the Spire B (30)** is **failed** (*Keihard gefaald*) — the Algox main plot is mid-climax. The Oracle / Unyielding Shard chain (28→38→45–57) is largely **not done**.
+- After the town attack, we went on the **Algox Offensive** rather than scouting the mountain pass first.
+- At **Heart of Ice**, we split up to pursue three threads: the Algox war on **Snowscorn Peak**, the **Lurkers** at the Biting Sea, and the **Unfettered** constructs in the Crystal Fields.
+- We sided with the **Icespeakers** against the Snowspeakers at Snowscorn Mountain.
+- After **Skyhall**, we joined the push for **war** against the other Algox faction instead of backing the peace summit.
+- We **failed** **War of the Spire B** (Keihard gefaald).
+- Facing the Unfettered **Orphan**, we tried to **broker peace** rather than destroy them.
+- In the Unfettered complex, we reached the core through the **Buried Ducts** (not the deeper transit tunnels).
+- Table note — **Derelict Freighter (127)**: Not 100% sure about no. of crates
 
-In parallel you **brokered peace with the Unfettered Orphan (59)** after **Nerve Center (44)** via **Buried Ducts (36)**; **Collapsing Vent (98)** remains. The **Lurker Coral Crown** arc is **mid-way** (bathysphere thread through 34/42, not crown reunion). **Aesther** array is at **The Face of Torment (68)**. **Pinter's road** needs **Caravan Guards (116)**. Several **treasure-chest side scenarios** are open (107–111, 121, 126, 136).
+## Campaign progress
 
-## Completed scenarios
+### Blocked — other path taken
+
+We can't do these in this campaign branch:
+
+- **2 — Algox Scouting**
+- **25 — Rusted Tunnels**
+- **37 — The Dead Mile**
+
+### Hidden — not yet revealed
+
+Still secret on the map / in the story:
+
+- **51 — Orphan's Halls**
+- **58 — Orphan's Core**
+
+## Plot threads
+
+### Algox civil war
+- Icespeaker allies; Skyhall done; war assault failed at War of the Spire B.
+- **Still open:** Retry the assault, or see whether peace talks (Summit Meeting) are still an option at your table.
+
+### Unfettered & Crain
+- Peace with the Orphan; second factory cleared through Program Control Nexus.
+- **Still open:** Collapsing Vent; the Harbinger / seal storyline may unlock later via Crain's workshop.
+
+### Lurkers & Coral Crown
+- Shards collected; bathysphere built; Sun-in-Shallows arc started.
+- **Still open:** Crown reunion scenarios — not started.
+
+### Aesther elementals
+- Cores retrieved from four planes; attunement went wrong.
+- **Still open:** The Face of Torment — new rift opened.
+
+### True Oak
+- Listerius triangulated the tree; Radiant Order confrontation resolved.
+
+### Pinter's Copperneck road
+- Explosives and pylon defense done.
+- **Still open:** Caravan Guards — first merchant run on the shortcut.
+
+### Mindthief in the woods
+- Cleared the influenced guards at the cabin.
+- **Still open:** Black Memories — trail leads toward the Black Barrow near Gloomhaven.
+
+### Treasure-map side jobs
+- Lustrous Pit, Lush Grotto, Derelict Freighter done.
+- **Still open:** Emperor's invitation, factory, temple keystone, ice cave, Joseph's shop, pirate hoard, etc.
+
+## What happened (by scenario)
+
+Narrative reminders for scenarios we've **finished**.
 
 ### 0 — Howling in the Snow
-
-*Treasures looted: [47]*
 
 ### 1 — A Town in Flames
 
@@ -65,11 +145,7 @@ Your group of mercenaries was hired to escort a Merchant's Guild caravan from Wh
 
 You helped push back an Algox attack; Mayor Satha asked your help dealing with them further. Satha's Valrath scout spotted a small group heading to Snowscorn Mountain's deadly eastern face, and suspected a secret entrance back there.
 
-*Treasures looted: [18]*
-
 ### 4 — Heart of Ice
-
-*Treasures looted: [70]*
 
 ### 6 — Avalanche
 
@@ -79,8 +155,6 @@ You sided with the Icespeakers in their battle against the Snowspeakers by killi
 
 After dealing with the immediate Algox issue threatening Frosthaven, Mayor Satha mentioned Lurkers were sighted on the outskirts of Frosthaven territory. You have been asked to check it out.
 
-*Treasures looted: [44]*
-
 ### 8 — Crystal Trench
 
 After dealing with the immediate Algox situation, Mayor Satha mentioned strange metal constructs were marching through the wastes. Scouts tracked them through Whitefire Wood, then into a frozen valley. She asked you to look into this.
@@ -89,37 +163,25 @@ After dealing with the immediate Algox situation, Mayor Satha mentioned strange 
 
 On your way up, you were caught by an avalanche. You have fought your way through and obtained Climbing Gear to help you reach the summit.
 
-*Treasures looted: [71]*
-
 ### 12 — Temple Entrance
 
 On your way up, you were caught by an avalanche. You noticed that the avalanche revealed a ruined stone structure jutting out of the ground, not too far away, and decided it was worth a look.
-
-*Treasures looted: [9]*
 
 ### 13 — Frozen Fjord
 
 You pursued them to the edge of the Biting Sea, where you encountered Lurkers in a cave dug into a cliff. You found a strange coral shard in the skull of a Living Corpse; it communicated with you that it wanted you to take it north, far out to the sea, away from the cliffs. You figured this was what the Lurkers were after. Before heading out on the open sea, you decided to follow the shard's pull overland along the northern coast.
 
-*Treasures looted: [49]*
-
 ### 14 — Jagged Shoals
 
 You pursued them to the edge of the Biting Sea, where you encountered Lurkers in a cave dug into a cliff. You found a strange coral shard in the skull of a Living Corpse; it communicated with you that it wanted you to take it north, far out to the sea, away from the cliffs. You figured this was what the Lurkers were after. Having built a ship, you decided to head out to the ice-choked sea and see where the Shard wanted to bring you.
-
-*Treasures looted: [64]*
 
 ### 15 — Ancient Spire
 
 You ran through a hazardous valley, pursued by wolves, where it opened into the Crystal Fields, full of huge crystal pillars as tall as trees. You noted one massive spire, larger and darker in color than the rest, and decided to check it out.
 
-*Treasures looted: [40]*
-
 ### 16 — Derelict Elevator
 
 You ran through a hazardous valley, pursued by wolves, where it opened into the Crystal Fields, full of huge crystal pillars as tall as trees. You noticed one distant spike which looked a little curious - shorter and wider than the rest - and decided to check it out.
-
-*Treasures looted: [77]*
 
 ### 19 — Skyhall
 
@@ -149,13 +211,9 @@ You defeated the Chaos Lieutenant guarding the entrance, who proclaimed they wer
 
 This turned out to be an ancient building of some sort. You broke it open and found broken machines, glass, and clutter. You found an ancient elevator and managed to turn it on, heading far downwards. At the bottom was a walkway in two directions - you headed away from a security alert, hoping to avoid the defenders.
 
-*Treasures looted: [73]*
-
 ### 32 — Ravens' Roost
 
 You crossed a bridge made of an ancient ribcage, and defeated the fiends guarding it. You decided to ignore the pull of the Shard for now, and investigate the western forest.
-
-*Treasures looted: [67]*
 
 ### 33 — Thawed Wood
 
@@ -177,13 +235,9 @@ There, you rescued a Quatryl scholar, Crain Tallengyr, who was studying the Unfe
 
 At the center of the complex, you encountered - and were taunted by - an intelligent and speaking Unfettered, who told you that they cannot coexist with biological life. You found it was an awkward being, simply built and not imposing at all. It told you of their history - that they used to be slaves, but were then abandoned. They refuse to be servants again, and this Unfettered - the Orphan - challenged you to destroy them, because they would not bow and beg for peace. You unexpectedly found yourselves envoys for the living creatures of the surface, and decided to try and broker a peace between your peoples.
 
-*Treasures looted: [7]*
-
 ### 65 — A Strong Foundation
 
 The Aesther are interested in setting up a research outpost in the North. You are doing the leg work. There's not much to it - sets up the background itself, here.
-
-*Treasures looted: [39]*
 
 ### 66 — Elemental Cores
 
@@ -201,19 +255,13 @@ You have heard rumors of a True Oak somewhere in the North, planted by a prophet
 
 A local Savvas botanist, Listerius, studied these wood samples. It sent you to the Radiant Forest to collect some soil samples, as well. With these, it was confident it could triangulate the location. After bringing them back, Listerius started to analyze them. A few weeks later, you found Listerius's cabin ransacked. The Radiant Order from White Oak had heard of its "blasphemy," stole the notes, and went to destroy the True Oak you've been searching for.
 
-*Treasures looted: [82]*
-
 ### 78 — The Lurker Problem
 
 A very strange and thirsty figure in a wet trenchcoat wanted to hire you for a job. He told you Lurkers had killed his family. He gave you directions to their location, said he'd meet you there, and then left abruptly. Totally normal. Not at all suspicious.
 
-*Treasures looted: [58]*
-
 ### 96 — Underground Station
 
 A traveler came to Frosthaven, from across the Whitefire Woods, with word of an active Unfettered complex - it was lit up and humming. Glint characteristically tried to get rid of him, but you showed up at just the right time. He's asked you to go check this complex out.
-
-*Treasures looted: [10]*
 
 ### 97 — Program Control Nexus
 
@@ -222,8 +270,6 @@ Sure enough, it was still active - and guarded. You took a rail line deep within
 ### 108 — Lustrous Pit
 
 In a chest, you found a painted stone tablet. The image depicts a strangely familiar landscape, and you felt you could find the location if you looked hard enough.
-
-*Treasures looted: [3]*
 
 ### 113 — Lush Grotto
 
@@ -241,110 +287,10 @@ That went about as well as could be expected when dynamite and polar bears mix, 
 
 Some force has been toying with the minds of Frosthaven's residents, including some guards - one of whom stabbed another. Captain Olmstead reported that this has been happening a lot this week. He's pretty sure something has set itself up in an abandoned cabin. Whatever it was then tried to make you disembowel yourselves. You figured you should check this out.
 
-*Treasures looted: [50]*
-
 ### 127 — Derelict Freighter
 
 A derelict ship came, apparently on its own, to Frosthaven's harbor. It was totally unoccupied, but the last page of the Captain's Log held only two words - "BURN IT." The crew may have tried to do this before their disappearance, because the decks are covered in lamp oil. The manifest showed eight crates of unknown cargo, bound for White Oak - but you only found one, bolted to the deck and sealed with tar. You took the captain's advice and burned the ship. Some time later, a Valrath confronted you about this; it was apparently his ship. He told you another ship was coming in with more cargo to make up for it, and enlisted you to unload it whenever it arrived, just stacking the crates by the docks. A few weeks later, the rest of the crates arrived at Frosthaven - this time, on a ship crewed by ice wraiths.
 
-*Treasures looted: [30]*
+---
 
-## Open scenarios
-
-### Available (incomplete)
-
-- **28 — Summit Meeting**
-  - Setup: You defeated the Icespeakers, but brought one survivor back to meet Chief Lanprul. The survivor reported that Geryuu had sent "burrowers" against them and that he was tired of this war. While Chief Lanprul was receptive, another - Denpang - encouraged an all-out assault with you at the Snowspeakers'...
-- **30 — War of the Spire B** — *Keihard gefaald*
-  - Setup: You found that the spirits of Skyhall - a place of great religious significance - had turned against the Icespeakers. While you laid them to rest, Chief Elland declared this could not continue - that war was bringing ruin to all the Algox. An older woman among them, Putargal, instead urged vengeance...
-- **31 — Crackling Tunnel**
-  - Setup: To defeat all the automata, you needed to destroy a strange glowing orb. Once defeated, you were able to investigate a strange door sealed by a complex puzzle door with gears and symbols. This meant nothing to you until the Quatryl academic, Crain Tallengyr, started asking you to investigate "Death ...
-- **42 — Sunless Trench**
-  - Setup: There, you were set upon by Lurkers drawn to the pull of the Shards you carry. They wrecked your boat, so you decided to search for another means of travel. Frosthaven's Tinkerer, Pinter Droman, designed a bathysphere - a craft to travel safely underwater - but it needed a power source. He suggested...
-- **68 — The Face of Torment**
-  - Setup: On return to the Aesther Outpost, you found the eight aesther in trouble. You needed to empower the cores with your own energies. Denizens of the elemental planes came forth to retrieve the stones, and you fought them off. While you succeeded at your task, something still went wrong... A new rift op...
-- **98 — Collapsing Vent**
-  - Setup: You battled with a "Program Director'' who wanted to decontaminate the facility. By beheading you. Cleanly. That didn't sound too appealing, so you defended yourselves and destroyed it. That deactivated all the cleaning robots - and also started collapsing the whole complex. Time to make a ... clean...
-- **107 — My Private Empire**
-  - Setup: In a chest, you found a wax-sealed letter - exquisitely written and decorated. The letter, signed by an "Emperor Ventillion," invited you to join him for a Midwinter Ball. It included a map to his estate (in the middle of nowhere) and will surely be an actual party, with wine and dancing, and not an...
-- **109 — Furious Factory**
-  - Setup: You found a delicate piece of curious machinery in a chest. When you took it out, it animated and projected a map above it. You figured out how to manipulated this projected map, and found the location of what looks to be a factory of some sort.
-- **110 — Guardian's Temple**
-  - Setup: You found a slab of shaped stone in a chest. It was shaped like a keystone, and you felt like you knew where it belonged. It mentally projected directions for you.
-- **111 — Ice Cave**
-  - Setup: You found a silver mirror in a chest. Unlike most mirrors, this one didn't reflect you - it showed an image of your group walking through the wilderness to a cave full of treasure.
-- **116 — Caravan Guards**
-  - Setup: Once that was done, Pinter and his crew were able to complete the road. Mayor Satha asked some local merchants to do a test run on this new shortcut, and asked you to guard the first caravans going south.
-- **121 — Black Memories**
-  - Setup: Some of the guards had fallen under the influence of the cabin's inhabitant - a group of Vermlings led by a Mindthief. She escaped - and you set to destroying an emitter device she'd been working on. You asked for Captain Olmstead's help in tracking down the Mindthief, and he introduced you to his f...
-- **122 — The Eternal Crave**
-  - Setup: In your travels, you found an elderly Quatryl tending some delicious-smelling peppers. She called these "firepeppers" - and told you a tale of a beast called the Hungry Maw, which lives beneath the Copperneck Mountains. Apparently, it eats entire villages, but can only be sated by a Firepepper Stew....
-- **126 — Joseph the Lion**
-  - Setup: A merchant named Joseph greeted you and told you all of his assistants died, and all of his merchandise was just sitting in the icy wastes. He asked your help to retrieve it. A few weeks after you did, he opened up an "ice-cream" stand in Frosthaven; you decided to check it out.
-- **136 — Abandoned Hideout**
-  - Setup: Dinah Snapclaw, the Vermling tavern-keeper at the Boiled Crab, has told you tales of a notorious pirate, Barty Half-Ear. She's had you hunting down ancient coins - like the one she wears. If you find all of them, they're supposed to lead to a huge treasure hoard. After bringing her one of the coins,...
-- **201 — ?**
-- **202 — ?**
-- **203 — ?**
-- **204 — ?**
-- **205 — ?**
-- **206 — ?**
-- **207 — ?**
-- **208 — ?**
-- **210 — ?**
-- **213 — ?**
-- **214 — ?**
-- **217 — ?**
-
-### Blocked (other path taken)
-
-- **2 — Algox Scouting**
-- **25 — Rusted Tunnels**
-- **37 — The Dead Mile**
-
-### Hidden (not yet revealed)
-
-- **51 — Orphan's Halls**
-- **58 — Orphan's Core**
-
-## Plot threads at a glance
-
-### Algox civil war
-- **Progress:** 19 done; 30 failed; 28 still listed open; Oracle chain mostly untouched
-- **Open:** 30 (retry?), 28 (peace — may be locked by section choices)
-
-### Unfettered / Crain
-- **Progress:** Peace with Orphan (59); second facility through 97
-- **Open:** 98 Collapsing Vent; Harbinger seals 61–64 not in save
-
-### Lurkers / Coral Crown
-- **Progress:** 13–22, 32–34, 42, 78
-- **Open:** Crown reunion 49–57, 60 not started
-
-### Aesther elementals
-- **Progress:** 65–67 done
-- **Open:** 68 The Face of Torment
-
-### True Oak
-- **Progress:** 69–70 done
-- **Open:** —
-
-### Pinter mountain road
-- **Progress:** 114–115 done
-- **Open:** 116 Caravan Guards
-
-### Mindthief
-- **Progress:** 120 done
-- **Open:** 121 Black Memories
-
-### Side / chest quests
-- **Progress:** 108, 113, 127 done
-- **Open:** 107, 109–111, 126, 136
-
-## Local reference files
-
-- `data/fh-recap-en.json` — Gloomhaven Secretariat recap text (from [Lurkars/gloomhavensecretariat](https://github.com/Lurkars/gloomhavensecretariat))
-- `stories.json` — your campaign export
-- Physical **Scenario Book** and **Section Book** remain the source of truth for § entries
-
-Re-run `python scripts/generate-recap.py` after updating `stories.json`.
+Regenerate: `python scripts/generate-recap.py` → `campaign-recap.html` for sharing. See `data/campaign-notes.md`.

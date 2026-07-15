@@ -2,12 +2,14 @@
 
 ## Data source
 
-Storyline exports live in **`exports/`** — one dated file per export, plus **`exports/latest.json`** as the default input for the generator.
+Storyline exports live in **`exports/`**, one dated file per export:
 
 ```
-exports/2026-07-14-storyline.json   ← dated archive
-exports/latest.json                 ← copy used by generate-recap.py
+exports/2026-07-14-storyline.json
+exports/2026-07-21-storyline.json   ← newest by name is used automatically
 ```
+
+Output recap files use the **same date as the export filename** (`2026-07-21-recap.md`).
 
 ## What the generator does
 
@@ -23,7 +25,7 @@ It reads **only** these inputs (it does **not** read this markdown file):
 
 | File | Role |
 |------|------|
-| `exports/latest.json` | Scenario states, notes, morale, prosperity, buildings |
+| `exports/*-storyline.json` | Scenario states, notes, morale, prosperity, buildings |
 | `data/scenario-names.en.json` | Scenario display names (**offline**) |
 | `data/fh-recap-en.json` | “Previously on Frosthaven…” text per scenario |
 | `data/plot-arcs.json` | Arc write-ups — titles, status, trails, story paragraphs |

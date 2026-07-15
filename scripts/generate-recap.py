@@ -61,6 +61,23 @@ def recap_text(recaps: dict, num: int) -> str | None:
     return None
 
 
+def load_save(export_path: Path) -> dict:
+    text = export_path.read_text(encoding="utf-8").strip()
+    if not text:
+        raise ValueError(f"{export_path.name} is empty")
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{export_path.name} is not valid JSON") from exc
+    if not isinstance(data, list) or not data:
+        raise ValueError(f"Unexpected export format in {export_path.name}")
+    return data[0]
+
+
+def list_storyline_exports() -> list[Path]:
+    return sorted(EXPORTS_DIR.glob("*-storyline.json"))
+
+
 def resolve_export_path(arg: str | None) -> Path:
     if arg:
         path = Path(arg)
@@ -70,26 +87,37 @@ def resolve_export_path(arg: str | None) -> Path:
             raise FileNotFoundError(f"Export not found: {path}")
         return path
 
-    latest = EXPORTS_DIR / "latest.json"
-    if latest.exists():
-        return latest
-
-    exports = sorted(EXPORTS_DIR.glob("*-storyline.json"))
+    exports = list_storyline_exports()
     if not exports:
         raise FileNotFoundError(
             f"No exports in {EXPORTS_DIR}. "
             "Save a Storyline export as exports/YYYY-MM-DD-storyline.json"
         )
-    return exports[-1]
+
+    skipped: list[str] = []
+    for path in reversed(exports):
+        try:
+            load_save(path)
+        except ValueError as exc:
+            skipped.append(str(exc))
+            continue
+        if skipped:
+            print(f"Warning: skipped invalid export(s): {'; '.join(skipped)}")
+        return path
+
+    raise ValueError(
+        f"No valid exports in {EXPORTS_DIR}. "
+        f"Problems: {'; '.join(skipped)}"
+    )
 
 
 def export_stamp(export_path: Path, save: dict) -> str:
-    updated = save.get("updated_at", "")[:10]
-    if updated:
-        return updated
     match = re.search(r"(\d{4}-\d{2}-\d{2})", export_path.name)
     if match:
         return match.group(1)
+    updated = save.get("updated_at", "")[:10]
+    if updated:
+        return updated
     return date.today().isoformat()
 
 
@@ -506,17 +534,16 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate campaign recap from Storyline export.")
     parser.add_argument(
         "--export",
-        help="Path to export JSON (default: exports/latest.json or newest dated export)",
+        help="Path to export JSON (default: newest exports/*-storyline.json by filename)",
     )
     parser.add_argument(
         "--stamp",
-        help="Output date stamp YYYY-MM-DD (default: from export updated_at or filename)",
+        help="Output date stamp YYYY-MM-DD (default: date from export filename)",
     )
     args = parser.parse_args()
 
     export_path = resolve_export_path(args.export)
-    with open(export_path, encoding="utf-8") as f:
-        save = json.load(f)[0]
+    save = load_save(export_path)
     data = save["data"]
     campaign = data["campaign-fh"]
 

@@ -14,7 +14,7 @@ This repo tracks one group’s campaign. The tooling is reusable for any Frostha
    exports/YYYY-MM-DD-storyline.json
    ```
 
-   Copy or rename it to `exports/latest.json` (or pass `--export` explicitly).
+   The generator uses the **newest file by name** (no `latest.json` copy step).
 
 2. Set your planned next session in `data/campaign-config.json` (Storyline’s “linked scenario” is not in the export):
 
@@ -73,11 +73,11 @@ See [`data/campaign-notes.md`](data/campaign-notes.md) for the full breakdown.
 ```
 exports/
   2026-07-14-storyline.json    # Dated Storyline export
-  latest.json                  # Pointer copy used by default
+  2026-07-15-storyline.json    # Newest by filename is used automatically
 output/
-  2026-07-14-recap.md          # Dated recap
-  2026-07-14-recap.html
-  latest-recap.md              # Most recent (share this)
+  2026-07-15-recap.md          # Same date as the export filename
+  2026-07-15-recap.html
+  latest-recap.md              # Copy of most recent run (convenient GitHub link)
   latest-recap.html
 scripts/
   generate-recap.py            # Main generator (offline)
@@ -94,7 +94,7 @@ data/
 
 | Input | Role |
 |-------|------|
-| `exports/latest.json` (or `--export`) | Scenario states, notes, morale, prosperity, buildings |
+| `exports/*-storyline.json` (newest by filename, or `--export`) | Scenario states, notes, morale, prosperity, buildings |
 | `data/scenario-names.en.json` | Scenario **names** (local — no network) |
 | `data/fh-recap-en.json` | “Previously on Frosthaven…” text per scenario |
 | `data/plot-arcs.json` | Arc narratives, status tags, scenario trails |

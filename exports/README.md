@@ -1,16 +1,23 @@
 # Storyline exports
 
-Save each Gloomhaven Storyline export here:
+Save each Gloomhaven Storyline export here, named by date:
 
 ```
 YYYY-MM-DD-storyline.json
 ```
 
-After adding a new export, copy it to **`latest.json`** (or pass `--export` to the generator):
+The generator picks the **newest file by name** (so `2026-07-21-storyline.json` beats `2026-07-14-storyline.json`):
 
 ```bash
-copy exports\2026-07-21-storyline.json exports\latest.json
 python scripts/generate-recap.py
 ```
 
-Older exports are kept for comparison; recaps are written to `output/` with the same date stamp.
+Output recap files use the same date: `output/2026-07-21-recap.md`.
+
+To use a specific export:
+
+```bash
+python scripts/generate-recap.py --export exports/2026-07-14-storyline.json
+```
+
+Older exports are kept for comparison.

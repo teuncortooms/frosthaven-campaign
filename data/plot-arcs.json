@@ -42,15 +42,16 @@
     {
       "id": "unfettered",
       "title": "Unfettered & Crain",
-      "status": "largely resolved",
-      "trail": [15, 16, 26, 36, 44, 59, 96, 97],
+      "status": "factory arc done — Harbinger / seal may be next",
+      "trail": [15, 16, 26, 36, 44, 59, 96, 97, 98],
       "trail_notes": [
         "Path into the complex: **Ancient Spire → Derelict Elevator → Buried Ducts (36)** — **The Dead Mile (37)** is blocked.",
-        "**Nerve Center (44) → Automaton Uprising (59)** — we chose **peace with the Orphan**; **58** is hidden/blocked."
+        "**Nerve Center (44) → Automaton Uprising (59)** — we chose **peace with the Orphan**; **58** is hidden/blocked.",
+        "**Collapsing Vent (98)** — escaped the collapsing facility after the Program Director fight."
       ],
-      "open": [98],
+      "open": [],
       "future": [61, 62, 63, 64],
-      "plain_terms": "**Crain Tallengyr**, the Unfettered **Orphan**, and whether machines and humans can coexist — mostly done, with one cleanup scenario left.",
+      "plain_terms": "**Crain Tallengyr**, the Unfettered **Orphan**, and whether machines and humans can coexist — the factory arc is **wrapped** (through **98**). The **Harbinger / seal** storyline (**61–64**) is still ahead.",
       "building_hint": { "key": "building-fh-34", "min_level": 6, "line": "**Building 34** (Crain's workshop) is built to a high level — the **Harbinger / seal** arc (**61–64**) may unlock soon." }
     },
     {

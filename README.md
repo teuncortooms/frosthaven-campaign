@@ -31,7 +31,10 @@ This repo tracks one group’s campaign. The tooling is reusable for any Frostha
    python scripts/generate-recap.py
    ```
 
-4. Share **`output/latest-recap.html`** with your group (open in a browser → Print → Save as PDF, or paste into Google Docs).
+   Or in Cursor Agent: **`@frosthaven-recap New export in exports/. Full recap workflow.`**  
+   (See `.cursor/skills/frosthaven-recap/SKILL.md`.)
+
+4. Share **`output/latest-recap.md`** on GitHub (or the HTML/PDF if you prefer).
 
 Outputs:
 

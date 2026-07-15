@@ -1,0 +1,6 @@
+---
+description: Frosthaven recap — when user mentions export or recap, use frosthaven-recap skill
+alwaysApply: true
+---
+
+When the user adds a Storyline export or asks to update the campaign recap, follow the **frosthaven-recap** project skill: diff export, sync `data/plot-arcs.json`, run `python scripts/generate-recap.py`, verify narrative text.

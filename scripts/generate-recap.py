@@ -1,11 +1,16 @@
-"""Generate player-facing campaign recap (Markdown + HTML) from stories.json."""
+"""Generate player-facing campaign recap (Markdown + HTML) from a Storyline export."""
+from __future__ import annotations
+
+import argparse
 import html
 import json
 import re
-import urllib.request
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+EXPORTS_DIR = ROOT / "exports"
+OUTPUT_DIR = ROOT / "output"
 RETIREMENT_SCENARIO_MIN = 200
 
 
@@ -27,25 +32,21 @@ def clean(text: str | None) -> str | None:
     return text
 
 
-def fetch_scenario_name(num: int) -> str:
-    base = (
-        "https://raw.githubusercontent.com/Lurkars/gloomhavensecretariat/"
-        "main/data/fh/scenarios/"
-    )
-    candidates = [f"{num:03d}.json"]
-    if num == 4:
-        candidates = ["004A.json", "004B.json"] + candidates
-    for filename in candidates:
-        try:
-            with urllib.request.urlopen(base + filename, timeout=8) as resp:
-                data = json.loads(resp.read())
-                name = data.get("name", "?")
-                if num == 4 and filename.startswith("004"):
-                    return name.replace(" A", "").replace(" B", "")
-                return name
-        except Exception:
-            continue
-    return "?"
+def load_scenario_names() -> dict[int, str]:
+    path = ROOT / "data" / "scenario-names.en.json"
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Missing {path}. Run: python scripts/fetch-scenario-names.py"
+        )
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return {int(k): v for k, v in data.get("names", {}).items()}
+
+
+def load_campaign_config() -> dict:
+    path = ROOT / "data" / "campaign-config.json"
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def recap_text(recaps: dict, num: int) -> str | None:
@@ -58,6 +59,38 @@ def recap_text(recaps: dict, num: int) -> str | None:
         if key and entry[key]:
             return entry[key]
     return None
+
+
+def resolve_export_path(arg: str | None) -> Path:
+    if arg:
+        path = Path(arg)
+        if not path.is_absolute():
+            path = ROOT / path
+        if not path.exists():
+            raise FileNotFoundError(f"Export not found: {path}")
+        return path
+
+    latest = EXPORTS_DIR / "latest.json"
+    if latest.exists():
+        return latest
+
+    exports = sorted(EXPORTS_DIR.glob("*-storyline.json"))
+    if not exports:
+        raise FileNotFoundError(
+            f"No exports in {EXPORTS_DIR}. "
+            "Save a Storyline export as exports/YYYY-MM-DD-storyline.json"
+        )
+    return exports[-1]
+
+
+def export_stamp(export_path: Path, save: dict) -> str:
+    updated = save.get("updated_at", "")[:10]
+    if updated:
+        return updated
+    match = re.search(r"(\d{4}-\d{2}-\d{2})", export_path.name)
+    if match:
+        return match.group(1)
+    return date.today().isoformat()
 
 
 def story_decisions(scenarios: dict[int, dict], names: dict[int, str]) -> list[str]:
@@ -144,13 +177,17 @@ def format_scenario_entry(
     recaps: dict,
     *,
     include_recap: bool = True,
+    highlight: bool = False,
 ) -> list[str]:
     lines: list[str] = []
     note = state.get("notes", "").strip()
     title = f"**{num} — {name}**"
     if note:
         title += f" — *{note}*"
-    lines.append(f"- {title}")
+    if highlight:
+        lines.append(f"- **→ {num} — {name}**" + (f" — *{note}*" if note else ""))
+    else:
+        lines.append(f"- {title}")
     if include_recap:
         recap = clean(recap_text(recaps, num))
         if recap:
@@ -215,6 +252,7 @@ def render_arc(
     scenarios: dict[int, dict],
     names: dict[int, str],
     data: dict,
+    next_scenario: int | None,
 ) -> list[str]:
     lines: list[str] = []
     status = arc.get("status", "")
@@ -236,7 +274,8 @@ def render_arc(
     for num in arc.get("open", []):
         if scenario_status(scenarios, num) == "incomplete":
             step = format_trail_step(num, names.get(num, "?"), scenarios)
-            lines.append(f"- **Next / retry:** {step}")
+            prefix = "**Next session:** " if num == next_scenario else "**Next / retry:** "
+            lines.append(f"- {prefix}{step}")
 
     future = arc.get("future", [])
     if future:
@@ -246,11 +285,11 @@ def render_arc(
             if scenario_status(scenarios, n) not in ("complete", "blocked")
         ]
         if not_done:
-            labels = ", ".join(f"**{n}**" for n in not_done)
             note = arc.get("not_started_note")
             if note:
                 lines.append(f"- **Not yet:** {note}")
             else:
+                labels = ", ".join(f"**{n}**" for n in not_done)
                 lines.append(f"- **Not yet:** {labels}")
 
     side_list = arc.get("scenarios", [])
@@ -288,6 +327,7 @@ def render_plot_arcs(
     scenarios: dict[int, dict],
     names: dict[int, str],
     data: dict,
+    next_scenario: int | None,
 ) -> list[str]:
     lines: list[str] = []
     lines.append("## Plot threads — where each arc stands")
@@ -299,7 +339,91 @@ def render_plot_arcs(
     if "intro" in plot_arcs:
         lines.extend(render_intro(plot_arcs["intro"], scenarios, data))
     for arc in plot_arcs.get("arcs", []):
-        lines.extend(render_arc(arc, scenarios, names, data))
+        lines.extend(render_arc(arc, scenarios, names, data, next_scenario))
+    return lines
+
+
+def render_choices(
+    incomplete_main: list[int],
+    incomplete_retirement: list[int],
+    scenarios: dict[int, dict],
+    names: dict[int, str],
+    recaps: dict,
+    config: dict,
+) -> list[str]:
+    lines: list[str] = []
+    lines.append("## Choices on the table")
+    lines.append("")
+    lines.append(
+        "Scenarios we **can play next** (or retry), with a story reminder for each. "
+        "Pick one when we meet — or cross-check Storyline if something unlocked since the last export."
+    )
+    lines.append("")
+
+    next_num = config.get("next_scenario")
+    next_note = config.get("next_scenario_note", "").strip()
+    if isinstance(next_num, int):
+        if scenario_status(scenarios, next_num) == "incomplete":
+            name = names.get(next_num, "?")
+            lines.append("### Next session")
+            lines.append("")
+            if next_note:
+                lines.append(f"*{next_note}*")
+                lines.append("")
+            lines.extend(
+                format_scenario_entry(
+                    next_num,
+                    name,
+                    scenarios[next_num],
+                    recaps,
+                    highlight=True,
+                )
+            )
+            lines.append("")
+            other = [n for n in incomplete_main if n != next_num]
+            if other:
+                lines.append("### Also available")
+                lines.append("")
+                for num in other:
+                    lines.extend(
+                        format_scenario_entry(
+                            num, names.get(num, "?"), scenarios[num], recaps
+                        )
+                    )
+        else:
+            lines.append(
+                f"*Configured next scenario **{next_num}** is not open in this export "
+                f"(state: {scenario_status(scenarios, next_num)}). Showing all open scenarios.*"
+            )
+            lines.append("")
+            for num in incomplete_main:
+                lines.extend(
+                    format_scenario_entry(
+                        num, names.get(num, "?"), scenarios[num], recaps
+                    )
+                )
+    elif incomplete_main:
+        for num in incomplete_main:
+            lines.extend(
+                format_scenario_entry(
+                    num, names.get(num, "?"), scenarios[num], recaps
+                )
+            )
+    else:
+        lines.append("- *(none listed in export)*")
+
+    lines.append("")
+    if incomplete_retirement:
+        lines.append("### Retirement / personal-quest scenarios")
+        lines.append("")
+        for num in incomplete_retirement:
+            lines.extend(
+                format_scenario_entry(
+                    num, names.get(num, "?"), scenarios[num], recaps
+                )
+            )
+        lines.append("")
+
     return lines
 
 
@@ -379,10 +503,24 @@ def markdown_to_html(md: str) -> str:
 
 
 def main() -> None:
-    with open(ROOT / "stories.json", encoding="utf-8") as f:
+    parser = argparse.ArgumentParser(description="Generate campaign recap from Storyline export.")
+    parser.add_argument(
+        "--export",
+        help="Path to export JSON (default: exports/latest.json or newest dated export)",
+    )
+    parser.add_argument(
+        "--stamp",
+        help="Output date stamp YYYY-MM-DD (default: from export updated_at or filename)",
+    )
+    args = parser.parse_args()
+
+    export_path = resolve_export_path(args.export)
+    with open(export_path, encoding="utf-8") as f:
         save = json.load(f)[0]
     data = save["data"]
     campaign = data["campaign-fh"]
+
+    stamp = args.stamp or export_stamp(export_path, save)
 
     with open(ROOT / "data" / "fh-recap-en.json", encoding="utf-8") as f:
         labels = json.load(f)
@@ -391,14 +529,19 @@ def main() -> None:
     with open(ROOT / "data" / "plot-arcs.json", encoding="utf-8") as f:
         plot_arcs = json.load(f)
 
+    config = load_campaign_config()
+    next_scenario = config.get("next_scenario")
+    if next_scenario is not None:
+        next_scenario = int(next_scenario)
+
+    names = load_scenario_names()
+
     scenarios: dict[int, dict] = {}
     for key, val in data.items():
         if key.startswith("scenario-fh-"):
             num = key.replace("scenario-fh-", "")
             if num.isdigit():
                 scenarios[int(num)] = val
-
-    names = {n: fetch_scenario_name(n) for n in sorted(scenarios) if n <= 220}
 
     complete = sorted(n for n, s in scenarios.items() if s.get("state") == "complete")
     incomplete = sorted(n for n, s in scenarios.items() if s.get("state") == "incomplete")
@@ -410,11 +553,12 @@ def main() -> None:
 
     lines: list[str] = []
     updated = save.get("updated_at", "?")[:10]
+    campaign_name = save.get("name", "campaign")
     lines.append("# Frosthaven — where we left off")
     lines.append("")
     lines.append(
-        f"*Updated {updated}. Scenario list synced from Storyline export — "
-        f"double-check the app before choosing what to play.*"
+        f"*Campaign **{campaign_name}** — export {updated}. "
+        f"Scenario list synced from Storyline — double-check the app before choosing what to play.*"
     )
     lines.append("")
     lines.append("## Outpost snapshot")
@@ -424,6 +568,9 @@ def main() -> None:
     lines.append(f"- **Morale:** {campaign.get('morale', '?')} / 20")
     lines.append(f"- **Prosperity index:** {campaign.get('prosperityIndex', '?')}")
     lines.append(f"- **Inspiration:** {campaign.get('inspiration', '?')}")
+    week = campaign.get("calendar", {}).get("week")
+    if week is not None:
+        lines.append(f"- **Calendar week:** {week}")
     soldiers = campaign.get("soldiers")
     defense = campaign.get("totalDefense")
     if soldiers is not None:
@@ -433,34 +580,19 @@ def main() -> None:
         lines.append(guard)
     lines.append(f"- **Scenarios completed:** {len(complete)}")
     lines.append("")
-    lines.extend(render_plot_arcs(plot_arcs, scenarios, names, data))
-    lines.append("## Choices on the table")
-    lines.append("")
-    lines.append(
-        "Scenarios we **can play next** (or retry), with a story reminder for each. "
-        "Pick one when we meet — or cross-check Storyline if something unlocked since the last export."
+    lines.extend(
+        render_plot_arcs(plot_arcs, scenarios, names, data, next_scenario)
     )
-    lines.append("")
-    if incomplete_main:
-        for num in incomplete_main:
-            lines.extend(
-                format_scenario_entry(
-                    num, names.get(num, "?"), scenarios[num], recaps
-                )
-            )
-    else:
-        lines.append("- *(none listed in export)*")
-    lines.append("")
-    if incomplete_retirement:
-        lines.append("### Retirement / personal-quest scenarios")
-        lines.append("")
-        for num in incomplete_retirement:
-            lines.extend(
-                format_scenario_entry(
-                    num, names.get(num, "?"), scenarios[num], recaps
-                )
-            )
-        lines.append("")
+    lines.extend(
+        render_choices(
+            incomplete_main,
+            incomplete_retirement,
+            scenarios,
+            names,
+            recaps,
+            config,
+        )
+    )
     lines.append("## Decisions we made")
     lines.append("")
     for decision in story_decisions(scenarios, names):
@@ -504,16 +636,29 @@ def main() -> None:
     lines.append("---")
     lines.append("")
     lines.append(
-        "Regenerate: `python scripts/generate-recap.py` → `campaign-recap.html` for sharing. "
-        "See `data/campaign-notes.md`."
+        f"Regenerate: `python scripts/generate-recap.py` "
+        f"(from `{export_path.relative_to(ROOT)}`) → "
+        f"`output/{stamp}-recap.html` for sharing. See `data/campaign-notes.md`."
     )
     lines.append("")
 
     md_text = "\n".join(lines)
-    (ROOT / "campaign-recap.md").write_text(md_text, encoding="utf-8")
-    (ROOT / "campaign-recap.html").write_text(markdown_to_html(md_text), encoding="utf-8")
-    print(f"Wrote {ROOT / 'campaign-recap.md'} ({len(lines)} lines)")
-    print(f"Wrote {ROOT / 'campaign-recap.html'}")
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    dated_md = OUTPUT_DIR / f"{stamp}-recap.md"
+    dated_html = OUTPUT_DIR / f"{stamp}-recap.html"
+    latest_md = OUTPUT_DIR / "latest-recap.md"
+    latest_html = OUTPUT_DIR / "latest-recap.html"
+
+    dated_md.write_text(md_text, encoding="utf-8")
+    dated_html.write_text(markdown_to_html(md_text), encoding="utf-8")
+    latest_md.write_text(md_text, encoding="utf-8")
+    latest_html.write_text(markdown_to_html(md_text), encoding="utf-8")
+
+    print(f"Export: {export_path.relative_to(ROOT)}")
+    print(f"Wrote {dated_md.relative_to(ROOT)} ({len(lines)} lines)")
+    print(f"Wrote {dated_html.relative_to(ROOT)}")
+    print(f"Wrote {latest_md.relative_to(ROOT)} (share this or the .html)")
 
 
 if __name__ == "__main__":

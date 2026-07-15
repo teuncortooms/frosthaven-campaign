@@ -1,0 +1,1288 @@
+[
+    {
+        "id": 3255,
+        "name": "teuncortooms",
+        "data": {
+            "campaign-fh": {
+                "boat": {
+                    "1": true,
+                    "2": true,
+                    "3": true,
+                    "4": false,
+                    "5": true,
+                    "6": true,
+                    "7": true,
+                    "8": false,
+                    "9": true,
+                    "10": true,
+                    "11": true,
+                    "12": true,
+                    "13": true,
+                    "14": true,
+                    "15": true,
+                    "16": true,
+                    "17": true,
+                    "18": true,
+                    "19": true
+                },
+                "hash": "80b046779fc42461fd03904e037d0be6",
+                "perks": {
+                    "1": [
+                        true
+                    ],
+                    "5": [
+                        true
+                    ]
+                },
+                "checks": {
+                    "1": true,
+                    "2": true,
+                    "3": true,
+                    "4": true,
+                    "5": true,
+                    "6": true,
+                    "7": true,
+                    "8": true
+                },
+                "morale": 16,
+                "recipes": {
+                    ":rockroot-2x": true,
+                    ":arrowvine-2x": true,
+                    ":corpsecap-2x": true,
+                    ":flamefruit-2x": true,
+                    ":snowthistle-2x": true
+                },
+                "unlocks": {},
+                "version": 331,
+                "calendar": {
+                    "week": 36,
+                    "sections": {
+                        "4": [
+                            41.3,
+                            180.1
+                        ],
+                        "5": [
+                            32.3,
+                            156.1
+                        ],
+                        "8": [
+                            62.2,
+                            179.5
+                        ],
+                        "10": [
+                            183.3,
+                            21.4
+                        ],
+                        "11": [
+                            62.2
+                        ],
+                        "15": [
+                            169.3
+                        ],
+                        "17": [
+                            86.1
+                        ],
+                        "18": [
+                            131.1
+                        ],
+                        "20": [
+                            129.3
+                        ],
+                        "22": [
+                            76.3,
+                            103.2
+                        ],
+                        "24": [
+                            66.2
+                        ],
+                        "25": [
+                            183.3
+                        ],
+                        "27": [
+                            54.3,
+                            138.1,
+                            193.2
+                        ],
+                        "29": [
+                            178.1
+                        ],
+                        "30": [
+                            95.4,
+                            183.3
+                        ],
+                        "31": [
+                            15.4
+                        ],
+                        "33": [
+                            80.4,
+                            163.3
+                        ],
+                        "35": [
+                            44.4,
+                            135.1
+                        ],
+                        "36": [
+                            29.3,
+                            185.2
+                        ],
+                        "40": [
+                            184.1
+                        ],
+                        "41": [
+                            185.4
+                        ],
+                        "60": [
+                            137.2
+                        ]
+                    }
+                },
+                "soldiers": 8,
+                "resources": {
+                    "hide": 0,
+                    "metal": 0,
+                    "axenut": 0,
+                    "lumber": 0,
+                    "rockroot": 0,
+                    "arrowvine": 0,
+                    "corpsecap": 0,
+                    "flamefruit": 0,
+                    "snowthistle": 0
+                },
+                "characters": {
+                    "05946c3d-2580-4b8c-80a9-c717afa91e6c": "PY",
+                    "073334bb-0c6e-4769-bba8-c2a3a8a1e739": "GE",
+                    "1600700b-9985-411e-9ec6-d3bd1a020e6a": "DW",
+                    "29814b5b-0fd2-409d-a5f6-16ed611f5116": "BB",
+                    "d3115191-0d42-45b3-8311-3de32214dfaa": "IF"
+                },
+                "summerRoad": {
+                    "1": true,
+                    "2": true,
+                    "4": true,
+                    "5": true,
+                    "6": true,
+                    "7": true,
+                    "9": true,
+                    "10": true,
+                    "12": true,
+                    "14": true,
+                    "15": true,
+                    "16": true,
+                    "17": true,
+                    "20": true,
+                    "22": true,
+                    "23": true,
+                    "25": true,
+                    "26": true,
+                    "28": true,
+                    "29": true,
+                    "30": true,
+                    "31": true,
+                    "32": true,
+                    "33": true,
+                    "38": true,
+                    "47": true,
+                    "50": true
+                },
+                "winterRoad": {
+                    "3": true,
+                    "4": true,
+                    "6": true,
+                    "8": true,
+                    "11": true,
+                    "12": true,
+                    "14": true,
+                    "16": true,
+                    "18": true,
+                    "19": true,
+                    "21": true,
+                    "22": true,
+                    "23": true,
+                    "24": true,
+                    "25": true,
+                    "26": true,
+                    "28": true,
+                    "29": true,
+                    "30": true,
+                    "33": true,
+                    "35": true,
+                    "41": true,
+                    "45": true
+                },
+                "inspiration": 6,
+                "itemDesigns": {
+                    "27": true,
+                    "51": true,
+                    "55": true,
+                    "58": true,
+                    "59": true,
+                    "60": true,
+                    "61": true,
+                    "69": true,
+                    "71": true,
+                    "72": true,
+                    "73": true,
+                    "76": true,
+                    "83": true,
+                    "84": true,
+                    "85": true,
+                    "86": true,
+                    "87": true,
+                    "88": true,
+                    "89": true,
+                    "90": true,
+                    "91": true,
+                    "92": true,
+                    "93": true,
+                    "94": true,
+                    "95": true,
+                    "96": true,
+                    "97": true,
+                    "98": true,
+                    "99": true,
+                    "100": true,
+                    "101": true,
+                    "102": true,
+                    "103": true,
+                    "104": true,
+                    "109": true,
+                    "112": true,
+                    "115": true,
+                    "117": true,
+                    "119": true,
+                    "167": true,
+                    "168": true,
+                    "170": true,
+                    "173": true,
+                    "174": true,
+                    "175": true,
+                    "177": true,
+                    "178": true,
+                    "180": true,
+                    "187": true,
+                    "190": true,
+                    "192": true,
+                    "212": true,
+                    "216": true,
+                    "221": true,
+                    "227": true,
+                    "233": true,
+                    "244": true,
+                    "245": true,
+                    "246": true
+                },
+                "totalDefense": 35,
+                "summerOutpost": {
+                    "1": true,
+                    "2": true,
+                    "4": true,
+                    "9": true,
+                    "10": true,
+                    "12": true,
+                    "13": true,
+                    "14": true,
+                    "16": true,
+                    "17": true,
+                    "19": true,
+                    "21": true,
+                    "23": true,
+                    "24": true,
+                    "25": true,
+                    "26": true,
+                    "27": true,
+                    "28": true,
+                    "29": true,
+                    "30": true,
+                    "33": true,
+                    "35": true,
+                    "45": true,
+                    "49": true,
+                    "52": true,
+                    "53": true,
+                    "58": true,
+                    "59": true,
+                    "60": true,
+                    "61": true,
+                    "62": true
+                },
+                "winterOutpost": {
+                    "6": true,
+                    "7": true,
+                    "8": true,
+                    "9": true,
+                    "11": true,
+                    "12": true,
+                    "16": true,
+                    "19": true,
+                    "21": true,
+                    "22": true,
+                    "23": true,
+                    "24": true,
+                    "26": true,
+                    "27": true,
+                    "28": true,
+                    "29": true,
+                    "30": true,
+                    "31": true,
+                    "32": true,
+                    "33": true,
+                    "35": true,
+                    "36": true,
+                    "37": true,
+                    "38": true,
+                    "39": true,
+                    "40": true,
+                    "41": true,
+                    "42": true,
+                    "43": true,
+                    "44": true,
+                    "45": true,
+                    "46": true,
+                    "47": true,
+                    "63": true,
+                    "79": true
+                },
+                "crossGameItems": {
+                    "cs": {},
+                    "gh": {
+                        "10": false,
+                        "21": false,
+                        "25": false,
+                        "37": false,
+                        "46": false,
+                        "53": false,
+                        "72": false,
+                        "83": false,
+                        "84": false,
+                        "85": false,
+                        "86": false,
+                        "87": false,
+                        "88": false,
+                        "93": false,
+                        "94": false,
+                        "102": false,
+                        "105": false,
+                        "106": false,
+                        "109": false,
+                        "110": false,
+                        "111": false,
+                        "115": false,
+                        "116": false,
+                        "120": false,
+                        "121": false,
+                        "122": false,
+                        "123": false,
+                        "126": false,
+                        "128": false
+                    },
+                    "jotl": {}
+                },
+                "prosperityIndex": 47,
+                "characterUnlocks": {
+                    "BB": true,
+                    "BN": true,
+                    "BO": true,
+                    "CR": true,
+                    "DF": true,
+                    "DM": true,
+                    "DW": true,
+                    "FF": true,
+                    "GE": true,
+                    "HT": true,
+                    "HV": true,
+                    "IF": true,
+                    "PY": true,
+                    "RG": true,
+                    "SU": true,
+                    "TA": true,
+                    "VW": true
+                },
+                "archivedCharacters": {
+                    "880f8926-5483-407b-bffe-71228293cc20": "FF"
+                },
+                "hidePersonalQuests": true
+            },
+            "overlay-fh-A": {
+                "name": "Brakke Betty",
+                "present": true
+            },
+            "overlay-fh-B": {
+                "name": "Sled",
+                "present": true
+            },
+            "overlay-fh-C": {
+                "name": "Climbing Gear",
+                "present": true
+            },
+            "overlay-fh-D": {
+                "name": "Ice Spike",
+                "present": false
+            },
+            "overlay-fh-E": {
+                "name": "Portcullis",
+                "present": false
+            },
+            "overlay-fh-F": {
+                "name": "Statue",
+                "present": true
+            },
+            "overlay-fh-H": {
+                "name": "Stage",
+                "present": false
+            },
+            "overlay-fh-J": {
+                "name": "Wall",
+                "present": true
+            },
+            "overlay-fh-K": {
+                "name": "Wall",
+                "present": true
+            },
+            "overlay-fh-L": {
+                "name": "Wall",
+                "present": true
+            },
+            "overlay-fh-M": {
+                "name": "Wall",
+                "present": true
+            },
+            "overlay-fh-W": {
+                "present": true
+            },
+            "overlay-fh-X": {
+                "present": true
+            },
+            "overlay-fh-Y": {
+                "present": true
+            },
+            "building-fh-5": {
+                "level": 2,
+                "state": "built"
+            },
+            "scenario-fh-0": {
+                "state": "complete",
+                "treasures": [
+                    47
+                ]
+            },
+            "scenario-fh-1": {
+                "state": "complete",
+                "promptChoice": 3
+            },
+            "scenario-fh-2": {
+                "state": "blocked",
+                "random_item_treasure": false
+            },
+            "scenario-fh-3": {
+                "state": "complete",
+                "treasures": [
+                    18
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-4": {
+                "state": "complete",
+                "choice": "6,7,8",
+                "treasures": [
+                    70
+                ],
+                "promptChoice": 1,
+                "random_item_treasure": false
+            },
+            "scenario-fh-6": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-7": {
+                "state": "complete",
+                "treasures": [
+                    44
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-8": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-gh-1": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "building-fh-12": {
+                "level": 2,
+                "state": "built"
+            },
+            "building-fh-17": {
+                "level": 2,
+                "state": "built"
+            },
+            "building-fh-34": {
+                "level": 6,
+                "state": "built"
+            },
+            "building-fh-35": {
+                "level": 3,
+                "state": "built"
+            },
+            "building-fh-37": {
+                "level": 3,
+                "state": "built"
+            },
+            "building-fh-74": {
+                "level": 2,
+                "state": "built"
+            },
+            "building-fh-83": {
+                "level": 2,
+                "state": "built"
+            },
+            "building-fh-85": {
+                "level": 2,
+                "state": "built"
+            },
+            "building-fh-90": {
+                "level": 2,
+                "state": "built"
+            },
+            "building-fh-98": {
+                "level": 3,
+                "state": "built"
+            },
+            "scenario-fc-96": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-11": {
+                "state": "complete",
+                "treasures": [
+                    71
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-12": {
+                "state": "complete",
+                "treasures": [
+                    9
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-13": {
+                "state": "complete",
+                "treasures": [
+                    49
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-14": {
+                "state": "complete",
+                "treasures": [
+                    64
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-15": {
+                "state": "complete",
+                "treasures": [
+                    40
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-16": {
+                "state": "complete",
+                "treasures": [
+                    77
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-19": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-20": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-21": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-22": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-23": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-24": {
+                "state": "complete"
+            },
+            "scenario-fh-25": {
+                "state": "blocked",
+                "random_item_treasure": false
+            },
+            "scenario-fh-26": {
+                "state": "complete",
+                "treasures": [
+                    73
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-28": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-30": {
+                "notes": "Keihard gefaald",
+                "state": "incomplete",
+                "treasures": [
+                    45
+                ]
+            },
+            "scenario-fh-31": {
+                "state": "incomplete"
+            },
+            "scenario-fh-32": {
+                "state": "complete",
+                "treasures": [
+                    67
+                ]
+            },
+            "scenario-fh-33": {
+                "state": "complete"
+            },
+            "scenario-fh-34": {
+                "state": "complete"
+            },
+            "scenario-fh-36": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-37": {
+                "state": "blocked",
+                "random_item_treasure": false
+            },
+            "scenario-fh-42": {
+                "state": "incomplete"
+            },
+            "scenario-fh-44": {
+                "state": "complete",
+                "choice": 59,
+                "promptChoice": 1,
+                "random_item_treasure": false
+            },
+            "scenario-fh-51": {
+                "state": "hidden",
+                "promptChoice": 1,
+                "random_item_treasure": false
+            },
+            "scenario-fh-58": {
+                "state": "hidden",
+                "random_item_treasure": false
+            },
+            "scenario-fh-59": {
+                "state": "complete",
+                "treasures": [
+                    7
+                ]
+            },
+            "scenario-fh-65": {
+                "state": "complete",
+                "treasures": [
+                    39
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-66": {
+                "state": "complete"
+            },
+            "scenario-fh-67": {
+                "state": "complete"
+            },
+            "scenario-fh-68": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-69": {
+                "state": "complete"
+            },
+            "scenario-fh-70": {
+                "state": "complete",
+                "treasures": [
+                    82
+                ]
+            },
+            "scenario-fh-78": {
+                "state": "complete",
+                "treasures": [
+                    58
+                ]
+            },
+            "scenario-fh-96": {
+                "state": "complete",
+                "treasures": [
+                    10
+                ]
+            },
+            "scenario-fh-97": {
+                "state": "complete"
+            },
+            "scenario-fh-98": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "achievement-CFP": {
+                "lost": false,
+                "count": 1,
+                "awarded": true,
+                "manual_awarded": true
+            },
+            "achievement-CSS": {
+                "lost": false,
+                "count": 1,
+                "awarded": true
+            },
+            "achievement-CUA": {
+                "lost": false,
+                "count": 1,
+                "awarded": true
+            },
+            "achievement-CUC": {
+                "lost": false,
+                "count": 1,
+                "awarded": true,
+                "manual_awarded": true
+            },
+            "scenario-fh-107": {
+                "state": "incomplete"
+            },
+            "scenario-fh-108": {
+                "state": "complete",
+                "treasures": [
+                    3
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-109": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-110": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-111": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-113": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-114": {
+                "state": "complete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-115": {
+                "state": "complete",
+                "promptChoice": 5,
+                "random_item_treasure": false
+            },
+            "scenario-fh-116": {
+                "state": "incomplete"
+            },
+            "scenario-fh-120": {
+                "state": "complete",
+                "treasures": [
+                    50
+                ],
+                "random_item_treasure": false
+            },
+            "scenario-fh-121": {
+                "state": "incomplete"
+            },
+            "scenario-fh-122": {
+                "state": "incomplete"
+            },
+            "scenario-fh-126": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-127": {
+                "notes": "Not 100% sure about no. of crates",
+                "state": "complete",
+                "treasures": [
+                    30
+                ],
+                "promptChoice": 2,
+                "random_item_treasure": false
+            },
+            "scenario-fh-136": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-201": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-202": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-203": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-204": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-205": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-206": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-207": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-208": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-210": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-213": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-214": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-fh-217": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-gh-202": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-gh-203": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-gh-204": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-gh-205": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-gh-206": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "scenario-gh-207": {
+                "state": "incomplete",
+                "random_item_treasure": false
+            },
+            "achievement-CCCS": {
+                "lost": false,
+                "count": 3,
+                "awarded": true
+            },
+            "achievement-CITF": {
+                "lost": false,
+                "count": 1,
+                "awarded": true,
+                "manual_awarded": true
+            },
+            "overlay-fh-G_red": {
+                "name": "Red Well",
+                "present": false
+            },
+            "achievement-CCCS2": {
+                "lost": false,
+                "count": 1,
+                "awarded": true
+            },
+            "achievement-CCCS3": {
+                "lost": false,
+                "count": 1,
+                "awarded": true
+            },
+            "achievementgroup-CORE": {
+                "achievements": [
+                    "CUC"
+                ]
+            },
+            "character-05946c3d-2580-4b8c-80a9-c717afa91e6c": {
+                "id": "PY",
+                "hash": "8d4f1cd3a01edf2141a25107fc641ae7",
+                "name": "Pyroclast",
+                "uuid": "05946c3d-2580-4b8c-80a9-c717afa91e6c",
+                "items": {
+                    "fh-2": true,
+                    "fh-6": true,
+                    "fh-14": true,
+                    "fh-17": true,
+                    "fh-24": true,
+                    "fh-86": true,
+                    "fh-97": true,
+                    "fh-99": true,
+                    "fh-100": true,
+                    "fh-104": true,
+                    "fh-112": true,
+                    "fh-119": true,
+                    "fh-123": true,
+                    "fh-124": true,
+                    "fh-128": true,
+                    "fh-167": true,
+                    "fh-212": true,
+                    "fh-244": true
+                },
+                "level": 4,
+                "perks": {},
+                "quest": {},
+                "checks": {},
+                "version": 48,
+                "abilities": {},
+                "masteries": {},
+                "resources": {
+                    "hide": 0,
+                    "metal": 0,
+                    "axenut": 0,
+                    "lumber": 0,
+                    "rockroot": 0,
+                    "arrowvine": 0,
+                    "corpsecap": 0,
+                    "flamefruit": 0,
+                    "snowthistle": 0
+                },
+                "sortOrder": 0,
+                "retirements": 1,
+                "abilityPerLevel": {
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
+                }
+            },
+            "character-073334bb-0c6e-4769-bba8-c2a3a8a1e739": {
+                "id": "GE",
+                "hash": "f99588e622d069cc7020543b6c231112",
+                "name": "ITEM NOT AVAILABLE",
+                "uuid": "073334bb-0c6e-4769-bba8-c2a3a8a1e739",
+                "items": {
+                    "fh-61": true,
+                    "fh-167": true
+                },
+                "level": 1,
+                "perks": {},
+                "quest": {},
+                "checks": {},
+                "version": 11,
+                "abilities": {},
+                "masteries": {},
+                "resources": {
+                    "hide": 0,
+                    "metal": 0,
+                    "axenut": 0,
+                    "lumber": 0,
+                    "rockroot": 0,
+                    "arrowvine": 0,
+                    "corpsecap": 0,
+                    "flamefruit": 0,
+                    "snowthistle": 0
+                },
+                "sortOrder": 0,
+                "abilityPerLevel": {
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
+                }
+            },
+            "character-1600700b-9985-411e-9ec6-d3bd1a020e6a": {
+                "id": "DW",
+                "gold": 4,
+                "hash": "b10a9f0637b3d7ebf0055890fda6e817",
+                "name": "Deathwalker",
+                "uuid": "1600700b-9985-411e-9ec6-d3bd1a020e6a",
+                "items": {
+                    "fh-22": true,
+                    "fh-26": true,
+                    "fh-28": true,
+                    "fh-29": true,
+                    "fh-83": true,
+                    "fh-92": true,
+                    "fh-103": true,
+                    "fh-122": true,
+                    "fh-124": true,
+                    "fh-245": true
+                },
+                "level": 3,
+                "perks": {},
+                "quest": {},
+                "checks": {},
+                "version": 21,
+                "abilities": {},
+                "masteries": {},
+                "resources": {
+                    "hide": 0,
+                    "metal": 0,
+                    "axenut": 0,
+                    "lumber": 0,
+                    "rockroot": 0,
+                    "arrowvine": 0,
+                    "corpsecap": 0,
+                    "flamefruit": 0,
+                    "snowthistle": 0
+                },
+                "sortOrder": 0,
+                "retirements": 1,
+                "abilityPerLevel": {
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
+                }
+            },
+            "character-29814b5b-0fd2-409d-a5f6-16ed611f5116": {
+                "id": "BB",
+                "hash": "fe30499c8b6eab6190a45c9149edceef",
+                "name": "Blinkblade",
+                "uuid": "29814b5b-0fd2-409d-a5f6-16ed611f5116",
+                "items": {
+                    "fh-8": true,
+                    "fh-14": true,
+                    "fh-17": true,
+                    "fh-60": true,
+                    "fh-85": true,
+                    "fh-90": true,
+                    "fh-93": true,
+                    "fh-95": true,
+                    "fh-101": true,
+                    "fh-109": true,
+                    "fh-127": true,
+                    "fh-129": true,
+                    "fh-178": true,
+                    "fh-187": true,
+                    "fh-245": true,
+                    "fh-246": true
+                },
+                "level": 5,
+                "perks": {},
+                "quest": {},
+                "checks": {},
+                "version": 34,
+                "abilities": {
+                    "overdrive": true,
+                    "blurry-jab": true,
+                    "twin-strike": true,
+                    "borrowed-time": true,
+                    "drive-recharge": true,
+                    "kinetic-transfer": true,
+                    "reckless-augmentation": true,
+                    "sand-in-the-hourglass": true,
+                    "temporal-displacement": true,
+                    "experimental-adjustment": true
+                },
+                "masteries": {},
+                "resources": {
+                    "hide": 0,
+                    "metal": 0,
+                    "axenut": 0,
+                    "lumber": 0,
+                    "rockroot": 0,
+                    "arrowvine": 0,
+                    "corpsecap": 0,
+                    "flamefruit": 0,
+                    "snowthistle": 0
+                },
+                "sortOrder": 0,
+                "retirements": 2,
+                "abilityPerLevel": {
+                    "2": "reckless-augmentation",
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
+                }
+            },
+            "character-880f8926-5483-407b-bffe-71228293cc20": {
+                "id": "FF",
+                "hash": "c2a6ec6cfec108780895e45cd59f24b3",
+                "name": "Frozen Fist",
+                "uuid": "880f8926-5483-407b-bffe-71228293cc20",
+                "items": {
+                    "fh-3": true,
+                    "fh-5": true,
+                    "fh-9": true,
+                    "fh-30": true,
+                    "fh-83": true,
+                    "fh-86": true,
+                    "fh-92": true,
+                    "fh-96": true,
+                    "fh-121": true,
+                    "fh-128": true,
+                    "fh-173": true,
+                    "fh-177": true,
+                    "fh-221": true,
+                    "fh-227": true,
+                    "fh-233": true
+                },
+                "level": 9,
+                "perks": {},
+                "quest": {},
+                "checks": {},
+                "version": 2,
+                "abilities": {},
+                "masteries": {},
+                "resources": {
+                    "hide": 0,
+                    "metal": 0,
+                    "axenut": 0,
+                    "lumber": 0,
+                    "rockroot": 0,
+                    "arrowvine": 0,
+                    "corpsecap": 0,
+                    "flamefruit": 0,
+                    "snowthistle": 0
+                },
+                "sortOrder": 0,
+                "retirements": 1,
+                "abilityPerLevel": {
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
+                }
+            },
+            "character-d3115191-0d42-45b3-8311-3de32214dfaa": {
+                "id": "IF",
+                "hash": "9dd0d24d60b6bd2f972c2b003b7012f5",
+                "name": "Infuser",
+                "uuid": "d3115191-0d42-45b3-8311-3de32214dfaa",
+                "items": {
+                    "fh-115": true,
+                    "fh-117": true,
+                    "fh-121": true,
+                    "fh-128": true,
+                    "fh-173": true,
+                    "fh-216": true
+                },
+                "level": 1,
+                "perks": {},
+                "quest": {},
+                "checks": {},
+                "version": 19,
+                "abilities": {},
+                "masteries": {},
+                "resources": {
+                    "hide": 0,
+                    "metal": 0,
+                    "axenut": 0,
+                    "lumber": 0,
+                    "rockroot": 0,
+                    "arrowvine": 0,
+                    "corpsecap": 0,
+                    "flamefruit": 0,
+                    "snowthistle": 0
+                },
+                "sortOrder": 0,
+                "abilityPerLevel": {
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
+                }
+            }
+        },
+        "games": [
+            "fh"
+        ],
+        "hash": "ad0ad78356a8b685516d40e11838d2d0",
+        "expires_at": "2026-09-24T00:02:03.000000Z",
+        "has_expired": false,
+        "expires_soon": false,
+        "is_shared": false,
+        "read_only": false,
+        "is_new": false,
+        "updated_at": "2026-07-14T16:56:06.000000Z",
+        "snapshots": [
+            {
+                "id": 365063,
+                "name": "teuncortooms",
+                "hash": "ad0ad78356a8b685516d40e11838d2d0",
+                "created_at": "2026-07-14T16:56:57.000000Z"
+            },
+            {
+                "id": 365026,
+                "name": "teuncortooms",
+                "hash": "a0cc37cf90e674f4c3db6efc62d4fabd",
+                "created_at": "2026-07-13T23:50:04.000000Z"
+            },
+            {
+                "id": 364878,
+                "name": "teuncortooms",
+                "hash": "a0cc37cf90e674f4c3db6efc62d4fabd",
+                "created_at": "2026-07-13T23:50:04.000000Z"
+            },
+            {
+                "id": 360826,
+                "name": "teuncortooms",
+                "hash": "b47e7224bade78075ea0aeef537997b2",
+                "created_at": "2026-06-29T23:50:04.000000Z"
+            },
+            {
+                "id": 356824,
+                "name": "teuncortooms",
+                "hash": "2800fbf8f23bafe45dbde719ad814072",
+                "created_at": "2026-06-16T23:50:04.000000Z"
+            },
+            {
+                "id": 352301,
+                "name": "teuncortooms",
+                "hash": "b4071c92dd7162a690c149fe821f00fd",
+                "created_at": "2026-06-01T23:50:03.000000Z"
+            },
+            {
+                "id": 304374,
+                "name": "teuncortooms",
+                "hash": "8b509000de1e37315cec193ff171c095",
+                "created_at": "2025-12-30T23:50:03.000000Z"
+            }
+        ]
+    }
+]

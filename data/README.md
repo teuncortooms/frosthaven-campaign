@@ -2,22 +2,30 @@
 
 ## Workflow
 
-See **`campaign-notes.md`** for what Gloomhaven Storyline tracks vs what we sync manually, and how the player recap is meant to be used.
+See **`campaign-notes.md`** for the full session workflow and what is automatic vs manual.
 
-## `fh-recap-en.json`
+## Files
 
-Narrative recap labels from [Gloomhaven Secretariat](https://gloomhaven-secretariat.de) ([source on GitHub](https://github.com/Lurkars/gloomhavensecretariat/blob/main/data/fh/label/spoiler/en.json)).
+| File | Source | Used by script? |
+|------|--------|-----------------|
+| `scenario-names.en.json` | [Gloomhaven Secretariat scenarios](https://github.com/Lurkars/gloomhavensecretariat/tree/main/data/fh/scenarios) | Yes — display names (offline) |
+| `fh-recap-en.json` | [Secretariat labels](https://github.com/Lurkars/gloomhavensecretariat/blob/main/data/fh/label/spoiler/en.json) | Yes — “Previously on…” text |
+| `plot-arcs.json` | Hand-written for this campaign | Yes — arc narratives |
+| `campaign-config.json` | Hand-written (next scenario, etc.) | Yes |
+| `campaign-notes.md` | Human docs | No |
 
-Use this for **“Previously on Frosthaven…”** text keyed by scenario number. It does **not** replace the physical Scenario Book or Section Book.
+Refresh scenario names (optional, needs network):
 
-## Regenerating `campaign-recap.md`
+```bash
+python scripts/fetch-scenario-names.py
+```
 
-After exporting a fresh `stories.json` from Gloomhaven Storyline:
+## Regenerating recaps
+
+After a new export in `exports/`:
 
 ```bash
 python scripts/generate-recap.py
 ```
 
-The recap is **player-facing**: story, decisions, open/blocked/hidden scenarios, and narrative reminders.
-
-Outputs: `campaign-recap.md` and **`campaign-recap.html`** (for sharing — see `campaign-notes.md`).
+Outputs go to `output/` — share **`output/latest-recap.html`**.

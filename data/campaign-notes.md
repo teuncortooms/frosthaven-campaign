@@ -2,7 +2,12 @@
 
 ## Data source
 
-`stories.json` is exported from **Gloomhaven Storyline** (IndexedDB / campaign sync), not maintained by hand in this repo.
+Storyline exports live in **`exports/`** — one dated file per export, plus **`exports/latest.json`** as the default input for the generator.
+
+```
+exports/2026-07-14-storyline.json   ← dated archive
+exports/latest.json                 ← copy used by generate-recap.py
+```
 
 ## What the generator does
 
@@ -12,76 +17,86 @@ Run:
 python scripts/generate-recap.py
 ```
 
-It reads **only** these inputs (it does **not** read this markdown file or any free-form instructions):
+Optional: `python scripts/generate-recap.py --export exports/2026-07-14-storyline.json`
+
+It reads **only** these inputs (it does **not** read this markdown file):
 
 | File | Role |
 |------|------|
-| `stories.json` | Scenario states (complete / incomplete / blocked / hidden), notes, morale, prosperity, buildings, etc. |
-| `data/fh-recap-en.json` | “Previously on Frosthaven…” text per scenario (Secretariat labels) |
-| `data/plot-arcs.json` | **Story arc write-ups** — titles, status labels, scenario trails, plain-language summaries |
+| `exports/latest.json` | Scenario states, notes, morale, prosperity, buildings |
+| `data/scenario-names.en.json` | Scenario display names (**offline**) |
+| `data/fh-recap-en.json` | “Previously on Frosthaven…” text per scenario |
+| `data/plot-arcs.json` | Arc write-ups — titles, status, trails, story paragraphs |
+| `data/campaign-config.json` | **Next session** scenario (Storyline “linked” choice is not in the export) |
 
 It writes:
 
 | Output | Use |
 |--------|-----|
-| `campaign-recap.md` | Edit in repo, version control |
-| `campaign-recap.html` | **Share with the group** (PDF / Google Docs) |
+| `output/YYYY-MM-DD-recap.md` | Dated recap (kept for history) |
+| `output/YYYY-MM-DD-recap.html` | Dated HTML |
+| `output/latest-recap.md` / `.html` | Most recent run — **share the HTML** |
 
-It also **fetches scenario names** from GitHub (Gloomhaven Secretariat) when you regenerate — needs network.
+No network is required for normal regeneration. Scenario names are stored locally. To refresh names from Secretariat: `python scripts/fetch-scenario-names.py`.
 
-### What is automatic vs hand-written
+## After each session — what is automatic vs manual?
 
-**Automatic (from `stories.json`):**
+Your instinct is right: **the script alone is not a full “write the recap for me” pipeline**, but it *is* enough for most session-to-session updates if you accept that arc *interpretation* is curated separately.
 
-- Which scenarios are open / blocked / hidden / complete
-- Scenario trails show only **completed** steps as `A → B → C`
-- Open scenarios on an arc get a **Next / retry** line
+### Automatic (just export + run)
+
+- Which scenarios are open, complete, blocked, hidden
+- **Progress** trails on each arc (`A → B → C` for completed steps)
+- **Next / retry** lines for open scenarios listed on each arc
+- **Choices on the table** — recap snippets for every open scenario
+- **Next session** block — from `campaign-config.json`
 - Table notes (e.g. *Keihard gefaald*)
-- Building levels (e.g. Crain’s workshop hint when Building 34 is high enough)
-- Conditional intro lines (e.g. Algox Offensive vs Scouting) via rules in `plot-arcs.json`
+- Building hints (e.g. Crain’s workshop level)
+- Conditional intro lines (Algox Offensive vs Scouting) via rules in `plot-arcs.json`
+- Full “what happened” text for newly completed scenarios
 
-**Hand-written (you edit `data/plot-arcs.json`):**
+### Manual (occasionally)
 
-- Arc titles and status tags (*“active, mid-climax”*, *“largely resolved”*)
-- Which scenario numbers belong to each arc
-- **Story:** paragraphs in plain language
-- Extra bullets and `trail_notes`
+| File | When to edit |
+|------|--------------|
+| `exports/` | Every session — new Storyline export |
+| `data/campaign-config.json` | When you change the linked / planned next scenario |
+| `data/plot-arcs.json` | When narrative **status** or **story meaning** shifts — e.g. war assault failed, arc largely wrapped, new fork opened. Trails often still auto-update from the export; you mainly edit `status`, `plain_terms`, `trail_notes`, and `future` lists when structure changes |
+| `scripts/generate-recap.py` | Rarely — new branch-detection rules in `story_decisions()` |
+| `data/scenario-names.en.json` | Almost never — optional refresh script |
 
-**Hand-written in Python (`scripts/generate-recap.py`):**
+**Rule of thumb:** export + run after every session; touch `plot-arcs.json` when something *story-significant* changed, not every week.
 
-- **Decisions we made** — inferred branch logic (Icespeaker vs Snowspeaker, peace with Orphan, etc.)
-- Document structure and HTML export
+### `campaign-notes.md` vs `plot-arcs.json` vs `campaign-config.json`
 
-To change how an arc is **described**, edit `data/plot-arcs.json`.  
-To change **branch detection** or add new sections, edit the script.
-
-### `campaign-notes.md` vs `plot-arcs.json`
-
-- **`campaign-notes.md`** (this file) — workflow docs for humans; **not** loaded by the script.
-- **`plot-arcs.json`** — structured arc content the script **does** load.
+- **`campaign-notes.md`** — this file; humans only.
+- **`plot-arcs.json`** — structured arc content the script loads.
+- **`campaign-config.json`** — table preferences the export does not capture (next scenario).
 
 ## What the app tracks
 
-**Gloomhaven Storyline** is the live source during play. The recap copies scenario state from the last export so the group can see progress — re-export and regenerate when that changes.
+**Gloomhaven Storyline** is the live source during play. Re-export and regenerate when scenario status changes.
 
 ## What we sync manually
 
-- Morale, prosperity, inspiration, town guard
+- Morale, prosperity, inspiration, town guard (if not in export)
 - Scenario notes
 - Full export when open/blocked lists change
+- Next linked scenario in `campaign-config.json`
 
 ## What the export does *not* track reliably
 
 - Character levels or full roster
 - Complete retired-character history
+- Storyline “linked” / pinned next scenario
 
 ## Sharing with the team
 
-See **Sharing with the team** section below — use `campaign-recap.html`, not raw `.md`.
+Use **`output/latest-recap.html`**, not raw `.md`.
 
 ### Option A — PDF (best for WhatsApp)
 
-1. Open `campaign-recap.html` in Chrome or Edge.
+1. Open `output/latest-recap.html` in Chrome or Edge.
 2. Print → Save as PDF.
 3. Send in WhatsApp.
 
@@ -91,6 +106,7 @@ Open HTML in browser → Ctrl+A → Ctrl+C → paste into Google Docs, or upload
 
 ## Reference data
 
+- `scenario-names.en.json` — scenario titles
 - `fh-recap-en.json` — scenario recap text
 - `plot-arcs.json` — arc “whereabouts” narratives
 - Physical **Scenario Book** and **Section Book** — rules and § entries

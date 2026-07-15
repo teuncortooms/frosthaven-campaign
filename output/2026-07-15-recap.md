@@ -348,4 +348,4 @@ A derelict ship came, apparently on its own, to Frosthaven's harbor. It was tota
 
 ---
 
-Regenerate: `python scripts/generate-recap.py` (from `exports\2026-07-15-storyline.json`) → `output/2026-07-15-recap.html` for sharing. See `data/campaign-notes.md`.
+Regenerate: `python scripts/generate-recap.py` (from `exports\2026-07-15-storyline.json`) → `output/2026-07-15-recap.md` for sharing. See `README.md`.

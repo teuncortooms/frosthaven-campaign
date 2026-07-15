@@ -67,9 +67,7 @@ During play, **Gloomhaven Storyline** remains the live source of truth. This rec
 | Table notes from the export | New **branch rules** in the script’s `story_decisions()` when you hit a major fork the script doesn’t know yet |
 | Building-level hints (e.g. Crain’s workshop) | Wording tweaks any time you want the recap to read better |
 
-**Practical workflow:** after most sessions, export + run the script and share the HTML. Every few sessions (or when a major arc turns), skim `plot-arcs.json` and update status/story lines. That file changes far less often than `stories.json`.
-
-See [`data/campaign-notes.md`](data/campaign-notes.md) for the full breakdown.
+**Practical workflow:** after most sessions, export + run the script and share the recap. Every few sessions (or when a major arc turns), skim `plot-arcs.json` and update status/story lines. Or use **`@frosthaven-recap`** in Cursor Agent for the full workflow.
 
 ## Repository layout
 
@@ -90,7 +88,6 @@ data/
   fh-recap-en.json             # “Previously on…” labels (Secretariat)
   plot-arcs.json               # Arc titles, trails, plain-language summaries
   campaign-config.json         # Next linked scenario, etc.
-  campaign-notes.md            # Human workflow docs (not read by script)
 ```
 
 ### What the script reads
@@ -102,8 +99,6 @@ data/
 | `data/fh-recap-en.json` | “Previously on Frosthaven…” text per scenario |
 | `data/plot-arcs.json` | Arc narratives, status tags, scenario trails |
 | `data/campaign-config.json` | Next session scenario (linked choice) |
-
-The script **does not** read `data/campaign-notes.md`.
 
 ### Customising the recap
 

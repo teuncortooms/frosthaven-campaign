@@ -20,7 +20,7 @@ Run end-to-end when the user adds a Storyline export or asks for a new recap.
 | `data/campaign-config.json` | `next_scenario`, `next_scenario_note` |
 | `data/fh-recap-en.json`, `data/scenario-names.en.json` | Read-only unless user asks |
 
-Do **not** use `data/campaign-notes.md` for generation logic.
+See root `README.md` for workflow.
 
 ## Checklist
 

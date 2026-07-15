@@ -665,7 +665,7 @@ def main() -> None:
     lines.append(
         f"Regenerate: `python scripts/generate-recap.py` "
         f"(from `{export_path.relative_to(ROOT)}`) → "
-        f"`output/{stamp}-recap.html` for sharing. See `data/campaign-notes.md`."
+        f"`output/{stamp}-recap.md` for sharing. See `README.md`."
     )
     lines.append("")
 

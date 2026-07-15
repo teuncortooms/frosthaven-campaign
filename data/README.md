@@ -1,8 +1,6 @@
 # Frosthaven reference data
 
-## Workflow
-
-See **`campaign-notes.md`** for the full session workflow and what is automatic vs manual.
+Session workflow and automatic vs manual updates are documented in the root **[README.md](../README.md)** and **[exports/README.md](../exports/README.md)**.
 
 ## Files
 
@@ -12,7 +10,6 @@ See **`campaign-notes.md`** for the full session workflow and what is automatic 
 | `fh-recap-en.json` | [Secretariat labels](https://github.com/Lurkars/gloomhavensecretariat/blob/main/data/fh/label/spoiler/en.json) | Yes — “Previously on…” text |
 | `plot-arcs.json` | Hand-written for this campaign | Yes — arc narratives |
 | `campaign-config.json` | Hand-written (next scenario, etc.) | Yes |
-| `campaign-notes.md` | Human docs | No |
 
 Refresh scenario names (optional, needs network):
 
@@ -28,4 +25,6 @@ After a new export in `exports/`:
 python scripts/generate-recap.py
 ```
 
-Outputs go to `output/` — share **`output/latest-recap.html`**.
+Or in Cursor Agent: `@frosthaven-recap New export in exports/. Full recap workflow.`
+
+Outputs go to `output/` — share **`output/latest-recap.md`** on GitHub.

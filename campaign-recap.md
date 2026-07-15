@@ -12,13 +12,91 @@
 - **Town Guard:** 8 soldiers (outpost defense 35)
 - **Scenarios completed:** 40
 
-## The story so far
+## Plot threads — where each arc stands
 
-We are mercenaries who reached **Frosthaven** after the Imperial Pass thawed. After the opening attack, we took the **Algox Offensive** rather than scouting first. That led us into the Algox civil war, the Lurker Coral Shards, and the Unfettered beneath the Crystal Fields — often all at once.
+High-level map of the campaign. Scenario numbers come from the last Storyline export.
 
-On the **Algox** front, we backed the **Icespeakers**, survived **Skyhall**, and chose the **war path** over a peace summit. **War of the Spire B** went badly (*Keihard gefaald*) — that thread is stuck mid-climax. The Oracle / Unyielding Shard storyline (peace summit, Marogh, the combined ice-and-snow ritual) is mostly still ahead.
+### Setup — why we're in Frosthaven
 
-We **made peace with the Unfettered Orphan** (Crain's arc) and cleared a second facility up to **Program Control Nexus**; **Collapsing Vent** is still open. The **Lurker crown** plot is mid-way — bathysphere and shards, but no reunion yet. The **Aesther** elemental array failed at the attunement step (**The Face of Torment**). **Pinter's mountain road** is almost done — **Caravan Guards** is next. Various **side jobs from treasure chests** are still floating around.
+We finished **0 Howling in the Snow** and **1 A Town in Flames**: mercenaries escorting a Merchant Guild caravan to remote Frosthaven after the Imperial Pass thawed.
+
+We took **Algox Offensive (3)** — **Algox Scouting (2)** is blocked, so we went straight at the Algox threat rather than scouting first.
+
+### Algox civil war — *active, on the war path — mid-climax*
+
+- **Progress:** **3 Algox Offensive** → **4 Heart of Ice** → **6 Avalanche** → **11 Snowscorn Peak** → **19 Skyhall**
+- At **Heart of Ice (4)** we opened the three big forks: **6** (Algox mountains), **7** (Lurkers), **8** (Unfettered).
+- **Next / retry:** **28 Summit Meeting** *(open)*
+- **Next / retry:** **30 War of the Spire B** *(open — Keihard gefaald)*
+- **Not yet:** We have not done the Oracle / **Unyielding Shard** chain (**38**, **45–57**, **52**, etc.) — the deeper "true cause of Algox corruption" story is still ahead or on a branch we passed by.
+
+**Story:** The Algox are split (Snowspeakers vs Icespeakers) over how to worship **Geryuu**. We sided with the **Icespeakers**, saw corruption at **Skyhall**, and joined the faction pushing **total war** rather than emissary peace talks. That assault **failed** — the Algox main plot is paused mid-climax.
+
+**Summit Meeting (28)** is still on the table — peace talks may still be an option depending on what we read at Skyhall.
+
+**War of the Spire B (30)** needs a retry (*Keihard gefaald*).
+
+### Unfettered & Crain — *largely resolved*
+
+- **Progress:** **15 Ancient Spire** → **16 Derelict Elevator** → **26 Quatryl Library** → **36 Buried Ducts** → **44 Nerve Center** → **59 Automaton Uprising** → **96 Underground Station** → **97 Program Control Nexus**
+- Path into the complex: **Ancient Spire → Derelict Elevator → Buried Ducts (36)** — **The Dead Mile (37)** is blocked.
+- **Nerve Center (44) → Automaton Uprising (59)** — we chose **peace with the Orphan**; **58** is hidden/blocked.
+- **Next / retry:** **98 Collapsing Vent** *(open)*
+- **Not yet:** **61**, **62**, **63**, **64**
+- **Building 34** (Crain's workshop) is built to a high level — the **Harbinger / seal** arc (**61–64**) may unlock soon.
+
+**Story:** **Crain Tallengyr**, the Unfettered **Orphan**, and whether machines and humans can coexist — mostly done, with one cleanup scenario left.
+
+### Lurkers & Coral Crown — *started, not finished*
+
+- **Progress:** **7 Edge of the World** → **13 Frozen Fjord** → **14 Jagged Shoals** → **21 Realm of Endless Frost** → **22 Ice Floes** → **32 Ravens' Roost** → **33 Thawed Wood** → **34 Top of the Spire** → **78 The Lurker Problem**
+- Sea arc from **Edge of the World (7)**: fjords, shards, bathysphere thread through **42**.
+- **Next / retry:** **42 Sunless Trench** *(open)*
+- **Not yet:** **49**, **50**, **51**, **52**, **53**, **54**, **55**, **56**, **57**, **60**
+
+**Story:** **Coral Shards**, **Sun-in-Shallows**, rebuilding the Lurker kingdom — mid-arc, crown reunion not started.
+
+### Aesther elemental array — *one scenario from a payoff*
+
+- **Progress:** **65 A Strong Foundation** → **66 Elemental Cores** → **67 Core Attunement**
+- **Next / retry:** **68 The Face of Torment** *(open)*
+
+**Story:** Elemental cores from four planes are in place; attunement went wrong and a **new rift** opened.
+
+### True Oak / Radiant Order — *done for now*
+
+- **Progress:** **69 Sacred Soil** → **70 The True Oak**
+
+**Story:** Savvas botanist **Listerius**, stolen notes, Radiant Order zealots — wrapped unless something reopens it.
+
+### Pinter's Copperneck road — *almost done*
+
+- **Progress:** **114 Work Freeze** → **115 Pylon Problems**
+- **Next / retry:** **116 Caravan Guards** *(open)*
+
+**Story:** Mountain pass construction — Horns of Ruin Algox bandits defeated at the pylons.
+
+### Mindthief in the woods — *in progress*
+
+- **Progress:** **120 Under the Influence**
+- **Next / retry:** **121 Black Memories** *(open)*
+
+**Story:** Influenced guards at the cabin cleared; trail leads to the **Black Barrow** near Gloomhaven.
+
+### Side / treasure-chest scenarios — *several open*
+
+- **Scenario status:**
+  - **107 My Private Empire:** incomplete
+  - **108 Lustrous Pit:** complete
+  - **109 Furious Factory:** incomplete
+  - **110 Guardian's Temple:** incomplete
+  - **111 Ice Cave:** incomplete
+  - **113 Lush Grotto:** complete
+  - **126 Joseph the Lion:** incomplete
+  - **127 Derelict Freighter:** complete — Not 100% sure about no. of crates
+  - **136 Abandoned Hideout:** incomplete
+
+**Story:** Optional jobs from chests and events — not the main through-line, but they fill out the calendar and outpost life.
 
 ## Choices on the table
 
@@ -97,39 +175,6 @@ Still secret on the map / in the story:
 
 - **51 — Orphan's Halls**
 - **58 — Orphan's Core**
-
-## Plot threads
-
-### Algox civil war
-- Icespeaker allies; Skyhall done; war assault failed at War of the Spire B.
-- **Still open:** Retry the assault, or see whether peace talks (Summit Meeting) are still an option at your table.
-
-### Unfettered & Crain
-- Peace with the Orphan; second factory cleared through Program Control Nexus.
-- **Still open:** Collapsing Vent; the Harbinger / seal storyline may unlock later via Crain's workshop.
-
-### Lurkers & Coral Crown
-- Shards collected; bathysphere built; Sun-in-Shallows arc started.
-- **Still open:** Crown reunion scenarios — not started.
-
-### Aesther elementals
-- Cores retrieved from four planes; attunement went wrong.
-- **Still open:** The Face of Torment — new rift opened.
-
-### True Oak
-- Listerius triangulated the tree; Radiant Order confrontation resolved.
-
-### Pinter's Copperneck road
-- Explosives and pylon defense done.
-- **Still open:** Caravan Guards — first merchant run on the shortcut.
-
-### Mindthief in the woods
-- Cleared the influenced guards at the cabin.
-- **Still open:** Black Memories — trail leads toward the Black Barrow near Gloomhaven.
-
-### Treasure-map side jobs
-- Lustrous Pit, Lush Grotto, Derelict Freighter done.
-- **Still open:** Emperor's invitation, factory, temple keystone, ice cave, Joseph's shop, pirate hoard, etc.
 
 ## What happened (by scenario)
 

@@ -158,6 +158,151 @@ def format_scenario_entry(
     return lines
 
 
+def scenario_status(scenarios: dict[int, dict], num: int) -> str:
+    return scenarios.get(num, {}).get("state", "missing")
+
+
+def matches_when(when: dict, scenarios: dict[int, dict], data: dict) -> bool:
+    if "complete" in when:
+        if scenario_status(scenarios, when["complete"]) != "complete":
+            return False
+    if "blocked" in when:
+        if scenario_status(scenarios, when["blocked"]) != "blocked":
+            return False
+    if "any_incomplete" in when:
+        if not any(
+            scenario_status(scenarios, n) == "incomplete" for n in when["any_incomplete"]
+        ):
+            return False
+    if "building_min_level" in when:
+        building = data.get(when["building_min_level"]["key"], {})
+        if building.get("level", 0) < when["building_min_level"]["min_level"]:
+            return False
+    return True
+
+
+def format_trail_step(num: int, name: str, scenarios: dict[int, dict]) -> str:
+    label = f"**{num} {name}**"
+    state = scenario_status(scenarios, num)
+    note = scenarios.get(num, {}).get("notes", "").strip()
+    if state == "complete":
+        return label
+    if state == "incomplete":
+        if note:
+            return f"{label} *(open — {note})*"
+        return f"{label} *(open)*"
+    if state == "blocked":
+        return f"{label} *(blocked)*"
+    return label
+
+
+def render_intro(intro: dict, scenarios: dict[int, dict], data: dict) -> list[str]:
+    lines: list[str] = []
+    lines.append(f"### {intro['title']}")
+    lines.append("")
+    for line in intro.get("lines", []):
+        lines.append(line)
+        lines.append("")
+    for rule in intro.get("conditional", []):
+        if matches_when(rule["when"], scenarios, data):
+            lines.append(rule["line"])
+            lines.append("")
+    return lines
+
+
+def render_arc(
+    arc: dict,
+    scenarios: dict[int, dict],
+    names: dict[int, str],
+    data: dict,
+) -> list[str]:
+    lines: list[str] = []
+    status = arc.get("status", "")
+    header = f"### {arc['title']}"
+    if status:
+        header += f" — *{status}*"
+    lines.append(header)
+    lines.append("")
+
+    trail = arc.get("trail", [])
+    if trail:
+        done = [n for n in trail if scenario_status(scenarios, n) == "complete"]
+        if done:
+            chain = " → ".join(format_trail_step(n, names.get(n, "?"), scenarios) for n in done)
+            lines.append(f"- **Progress:** {chain}")
+        for note in arc.get("trail_notes", []):
+            lines.append(f"- {note}")
+
+    for num in arc.get("open", []):
+        if scenario_status(scenarios, num) == "incomplete":
+            step = format_trail_step(num, names.get(num, "?"), scenarios)
+            lines.append(f"- **Next / retry:** {step}")
+
+    future = arc.get("future", [])
+    if future:
+        not_done = [
+            n
+            for n in future
+            if scenario_status(scenarios, n) not in ("complete", "blocked")
+        ]
+        if not_done:
+            labels = ", ".join(f"**{n}**" for n in not_done)
+            note = arc.get("not_started_note")
+            if note:
+                lines.append(f"- **Not yet:** {note}")
+            else:
+                lines.append(f"- **Not yet:** {labels}")
+
+    side_list = arc.get("scenarios", [])
+    if side_list:
+        lines.append("- **Scenario status:**")
+        for num in side_list:
+            name = names.get(num, "?")
+            state = scenario_status(scenarios, num)
+            note = scenarios.get(num, {}).get("notes", "").strip()
+            detail = state
+            if note:
+                detail += f" — {note}"
+            lines.append(f"  - **{num} {name}:** {detail}")
+
+    hint = arc.get("building_hint")
+    if hint:
+        building = data.get(hint["key"], {})
+        if building.get("level", 0) >= hint.get("min_level", 1):
+            lines.append(f"- {hint['line']}")
+
+    if arc.get("plain_terms"):
+        lines.append("")
+        lines.append(f"**Story:** {arc['plain_terms']}")
+    for rule in arc.get("plain_terms_extra", []):
+        if matches_when(rule["when"], scenarios, data):
+            lines.append("")
+            lines.append(rule["line"])
+
+    lines.append("")
+    return lines
+
+
+def render_plot_arcs(
+    plot_arcs: dict,
+    scenarios: dict[int, dict],
+    names: dict[int, str],
+    data: dict,
+) -> list[str]:
+    lines: list[str] = []
+    lines.append("## Plot threads — where each arc stands")
+    lines.append("")
+    lines.append(
+        "High-level map of the campaign. Scenario numbers come from the last Storyline export."
+    )
+    lines.append("")
+    if "intro" in plot_arcs:
+        lines.extend(render_intro(plot_arcs["intro"], scenarios, data))
+    for arc in plot_arcs.get("arcs", []):
+        lines.extend(render_arc(arc, scenarios, names, data))
+    return lines
+
+
 def markdown_to_html(md: str) -> str:
     """Minimal Markdown to HTML for sharing (headings, bold, lists, italics)."""
     out: list[str] = []
@@ -243,6 +388,9 @@ def main() -> None:
         labels = json.load(f)
     recaps = labels.get("scenario", {}).get("recap", {}).get("fh", {})
 
+    with open(ROOT / "data" / "plot-arcs.json", encoding="utf-8") as f:
+        plot_arcs = json.load(f)
+
     scenarios: dict[int, dict] = {}
     for key, val in data.items():
         if key.startswith("scenario-fh-"):
@@ -285,31 +433,7 @@ def main() -> None:
         lines.append(guard)
     lines.append(f"- **Scenarios completed:** {len(complete)}")
     lines.append("")
-    lines.append("## The story so far")
-    lines.append("")
-    lines.append(
-        "We are mercenaries who reached **Frosthaven** after the Imperial Pass thawed. "
-        "After the opening attack, we took the **Algox Offensive** rather than scouting first. "
-        "That led us into the Algox civil war, the Lurker Coral Shards, and the Unfettered "
-        "beneath the Crystal Fields — often all at once."
-    )
-    lines.append("")
-    lines.append(
-        "On the **Algox** front, we backed the **Icespeakers**, survived **Skyhall**, "
-        "and chose the **war path** over a peace summit. **War of the Spire B** went badly "
-        "(*Keihard gefaald*) — that thread is stuck mid-climax. The Oracle / Unyielding Shard "
-        "storyline (peace summit, Marogh, the combined ice-and-snow ritual) is mostly still ahead."
-    )
-    lines.append("")
-    lines.append(
-        "We **made peace with the Unfettered Orphan** (Crain's arc) and cleared a second "
-        "facility up to **Program Control Nexus**; **Collapsing Vent** is still open. "
-        "The **Lurker crown** plot is mid-way — bathysphere and shards, but no reunion yet. "
-        "The **Aesther** elemental array failed at the attunement step (**The Face of Torment**). "
-        "**Pinter's mountain road** is almost done — **Caravan Guards** is next. "
-        "Various **side jobs from treasure chests** are still floating around."
-    )
-    lines.append("")
+    lines.extend(render_plot_arcs(plot_arcs, scenarios, names, data))
     lines.append("## Choices on the table")
     lines.append("")
     lines.append(
@@ -364,56 +488,6 @@ def main() -> None:
     else:
         lines.append("- *(none)*")
     lines.append("")
-    lines.append("## Plot threads")
-    lines.append("")
-    threads = [
-        (
-            "Algox civil war",
-            "Icespeaker allies; Skyhall done; war assault failed at War of the Spire B.",
-            "Retry the assault, or see whether peace talks (Summit Meeting) are still an option at your table.",
-        ),
-        (
-            "Unfettered & Crain",
-            "Peace with the Orphan; second factory cleared through Program Control Nexus.",
-            "Collapsing Vent; the Harbinger / seal storyline may unlock later via Crain's workshop.",
-        ),
-        (
-            "Lurkers & Coral Crown",
-            "Shards collected; bathysphere built; Sun-in-Shallows arc started.",
-            "Crown reunion scenarios — not started.",
-        ),
-        (
-            "Aesther elementals",
-            "Cores retrieved from four planes; attunement went wrong.",
-            "The Face of Torment — new rift opened.",
-        ),
-        (
-            "True Oak",
-            "Listerius triangulated the tree; Radiant Order confrontation resolved.",
-            None,
-        ),
-        (
-            "Pinter's Copperneck road",
-            "Explosives and pylon defense done.",
-            "Caravan Guards — first merchant run on the shortcut.",
-        ),
-        (
-            "Mindthief in the woods",
-            "Cleared the influenced guards at the cabin.",
-            "Black Memories — trail leads toward the Black Barrow near Gloomhaven.",
-        ),
-        (
-            "Treasure-map side jobs",
-            "Lustrous Pit, Lush Grotto, Derelict Freighter done.",
-            "Emperor's invitation, factory, temple keystone, ice cave, Joseph's shop, pirate hoard, etc.",
-        ),
-    ]
-    for title, progress, next_up in threads:
-        lines.append(f"### {title}")
-        lines.append(f"- {progress}")
-        if next_up:
-            lines.append(f"- **Still open:** {next_up}")
-        lines.append("")
     lines.append("## What happened (by scenario)")
     lines.append("")
     lines.append("Narrative reminders for scenarios we've **finished**.")

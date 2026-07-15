@@ -1,0 +1,107 @@
+{
+  "intro": {
+    "title": "Setup — why we're in Frosthaven",
+    "lines": [
+      "We finished **0 Howling in the Snow** and **1 A Town in Flames**: mercenaries escorting a Merchant Guild caravan to remote Frosthaven after the Imperial Pass thawed."
+    ],
+    "conditional": [
+      {
+        "when": { "complete": 3, "blocked": 2 },
+        "line": "We took **Algox Offensive (3)** — **Algox Scouting (2)** is blocked, so we went straight at the Algox threat rather than scouting first."
+      },
+      {
+        "when": { "complete": 2, "blocked": 3 },
+        "line": "We took **Algox Scouting (2)** — the offensive route is blocked."
+      }
+    ]
+  },
+  "arcs": [
+    {
+      "id": "algox",
+      "title": "Algox civil war",
+      "status": "active, on the war path — mid-climax",
+      "trail": [3, 4, 6, 11, 19],
+      "trail_notes": [
+        "At **Heart of Ice (4)** we opened the three big forks: **6** (Algox mountains), **7** (Lurkers), **8** (Unfettered)."
+      ],
+      "open": [28, 30],
+      "future": [38, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57],
+      "plain_terms": "The Algox are split (Snowspeakers vs Icespeakers) over how to worship **Geryuu**. We sided with the **Icespeakers**, saw corruption at **Skyhall**, and joined the faction pushing **total war** rather than emissary peace talks. That assault **failed** — the Algox main plot is paused mid-climax.",
+      "plain_terms_extra": [
+        {
+          "when": { "any_incomplete": [28] },
+          "line": "**Summit Meeting (28)** is still on the table — peace talks may still be an option depending on what we read at Skyhall."
+        },
+        {
+          "when": { "any_incomplete": [30] },
+          "line": "**War of the Spire B (30)** needs a retry (*Keihard gefaald*)."
+        }
+      ],
+      "not_started_note": "We have not done the Oracle / **Unyielding Shard** chain (**38**, **45–57**, **52**, etc.) — the deeper \"true cause of Algox corruption\" story is still ahead or on a branch we passed by."
+    },
+    {
+      "id": "unfettered",
+      "title": "Unfettered & Crain",
+      "status": "largely resolved",
+      "trail": [15, 16, 26, 36, 44, 59, 96, 97],
+      "trail_notes": [
+        "Path into the complex: **Ancient Spire → Derelict Elevator → Buried Ducts (36)** — **The Dead Mile (37)** is blocked.",
+        "**Nerve Center (44) → Automaton Uprising (59)** — we chose **peace with the Orphan**; **58** is hidden/blocked."
+      ],
+      "open": [98],
+      "future": [61, 62, 63, 64],
+      "plain_terms": "**Crain Tallengyr**, the Unfettered **Orphan**, and whether machines and humans can coexist — mostly done, with one cleanup scenario left.",
+      "building_hint": { "key": "building-fh-34", "min_level": 6, "line": "**Building 34** (Crain's workshop) is built to a high level — the **Harbinger / seal** arc (**61–64**) may unlock soon." }
+    },
+    {
+      "id": "lurkers",
+      "title": "Lurkers & Coral Crown",
+      "status": "started, not finished",
+      "trail": [7, 13, 14, 21, 22, 32, 33, 34, 42, 78],
+      "trail_notes": [
+        "Sea arc from **Edge of the World (7)**: fjords, shards, bathysphere thread through **42**."
+      ],
+      "open": [42],
+      "future": [49, 50, 51, 52, 53, 54, 55, 56, 57, 60],
+      "plain_terms": "**Coral Shards**, **Sun-in-Shallows**, rebuilding the Lurker kingdom — mid-arc, crown reunion not started."
+    },
+    {
+      "id": "aesther",
+      "title": "Aesther elemental array",
+      "status": "one scenario from a payoff",
+      "trail": [65, 66, 67],
+      "open": [68],
+      "plain_terms": "Elemental cores from four planes are in place; attunement went wrong and a **new rift** opened."
+    },
+    {
+      "id": "true_oak",
+      "title": "True Oak / Radiant Order",
+      "status": "done for now",
+      "trail": [69, 70],
+      "plain_terms": "Savvas botanist **Listerius**, stolen notes, Radiant Order zealots — wrapped unless something reopens it."
+    },
+    {
+      "id": "pinter",
+      "title": "Pinter's Copperneck road",
+      "status": "almost done",
+      "trail": [114, 115],
+      "open": [116],
+      "plain_terms": "Mountain pass construction — Horns of Ruin Algox bandits defeated at the pylons."
+    },
+    {
+      "id": "mindthief",
+      "title": "Mindthief in the woods",
+      "status": "in progress",
+      "trail": [120],
+      "open": [121],
+      "plain_terms": "Influenced guards at the cabin cleared; trail leads to the **Black Barrow** near Gloomhaven."
+    },
+    {
+      "id": "side_chests",
+      "title": "Side / treasure-chest scenarios",
+      "status": "several open",
+      "scenarios": [107, 108, 109, 110, 111, 113, 126, 127, 136],
+      "plain_terms": "Optional jobs from chests and events — not the main through-line, but they fill out the calendar and outpost life."
+    }
+  ]
+}
